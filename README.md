@@ -41,4 +41,11 @@ In addition, another benefit of this project is that it will prevent wasting and
 Your milk will expire in a day and you're pretty sure that you won't use it. In a normal case,
 you are going to throw it away but with the Local market, you can share it with your neighbors and ask if anyone needs it. You will earn money while helping others get what they want.
 
+## User stories
 
+- As a user, I want to add the items I want to buy to my bag.
+- As a user, I want to add my own stuff to the "available items to buy" list.
+- As a user, I want to be able to see the items in my bag.
+- As a user, I want to see how much should I pay for the items that are in my bag.
+- As a user, I want to be able to remove my own item from the "available items" list.
+- As a user, I want to be able to choose the residence where I live.
