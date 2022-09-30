@@ -2,18 +2,13 @@
 
 ## What will my market do?
 
-If you've ever lived at a residence, you know that your neighbors
-are your guardian angels. Cooking pasta and forgetting that your salt ends?
-Just ask your neighbors' community.
+Local Market is a shopping application where you can buy and sell your
+items to your neighbors. You can buy a small portion of spices or vegetables
+from your residence mates whenever you need them. In addition, if you have an unused item such as a bottle of milk or detergent,
+you can post it on the Local Market, earn money and connect with new people. If you are a green
+person, using this app will also help the environment
+as well!
 
-But if you are an introverted person like me who cannot ask others
-to lend you ingredients, or your neighbor doesn't have that specific item,
-then the local market will help you.
-
-You can easily find your residence and connect with a group of your neighbors. You can
-post what you need and buy it from a neighbor, or what you find useless and lend it to a neighbor in this
-market and sell it. You should just get on the elevator and knock on someone's door;
-hence you won't pay any tax or delivery fee.
 
 <figure>
 <img src="https://vancouver.housing.ubc.ca/wp-content/uploads/2014/02/Res_detail_Gage_towers_1170x660.jpg" 
@@ -28,18 +23,12 @@ List of *target* users:
 
 ## Why this project?
 
-I'm an introverted girl who lives on-campus. I usually cook at
-home and one of my daily issues is the lack of ingredients.
-Not only at cooking, but when it comes to cleaning or doing your laundry, you may
-run out of essential items. You cannot always ask your roommate or people
-around you to lend you stuff. With this local market, you can buy things
-you are looking for (even in tiny amounts) and connect with new people in
-your area.
+Using the Local Market will help you save your money as well as environment! You do not
+need to pay any tax or delivery fee. You are also able to buy stuff in any amount
+you want. It can be convenient when it comes to the time-management as well.
+No bus driving to the Save-on-foods and no need to stay in line to pay. Just
+hop on the elevator and knock on your neighbor's door!
 
-In addition, another benefit of this project is that it will prevent wasting and helps sustainability. Consider the following situation:
-
-Your milk will expire in a day and you're pretty sure that you won't use it. In a normal case,
-you are going to throw it away but with the Local market, you can share it with your neighbors and ask if anyone needs it. You will earn money while helping others get what they want.
 
 ## User stories
 
