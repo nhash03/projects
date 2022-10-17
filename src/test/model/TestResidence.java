@@ -143,5 +143,7 @@ public class TestResidence {
         assertEquals("pear", totemPark.getItems().get(2).getName());
         assertEquals("TV", totemPark.getItems().get(3).getName());
 
+        Residence nullRes = new Residence("null");
+        assertEquals(0, nullRes.getItems().size());
     }
 }
