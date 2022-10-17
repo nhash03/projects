@@ -115,30 +115,33 @@ public class TestResidence {
     public void testSetDefaultItems() {
         Residence walterGage = new Residence("Walter Gage");
         walterGage.setDefaultItems();
+        assertEquals(4, walterGage.getItems().size());
         assertEquals("milk", walterGage.getItems().get(0).getName());
         assertEquals("yoghurt", walterGage.getItems().get(1).getName());
         assertEquals("pencil", walterGage.getItems().get(2).getName());
         assertEquals("honey", walterGage.getItems().get(3).getName());
+
         Residence placeVanier = new Residence("Place Vanier");
         placeVanier.setDefaultItems();
+        assertEquals(3, placeVanier.getItems().size());
         assertEquals("coke", placeVanier.getItems().get(0).getName());
         assertEquals("coffee", placeVanier.getItems().get(1).getName());
         assertEquals("honey", placeVanier.getItems().get(2).getName());
+
         Residence exchange = new Residence("Exchange");
         exchange.setDefaultItems();
+        assertEquals(3, exchange.getItems().size());
         assertEquals("coke", exchange.getItems().get(0).getName());
         assertEquals("sugar", exchange.getItems().get(1).getName());
         assertEquals("honey", exchange.getItems().get(2).getName());
+
         Residence totemPark = new Residence("Totem Park");
         totemPark.setDefaultItems();
+        assertEquals(4, totemPark.getItems().size());
         assertEquals("banana", totemPark.getItems().get(0).getName());
         assertEquals("apple", totemPark.getItems().get(1).getName());
         assertEquals("pear", totemPark.getItems().get(2).getName());
         assertEquals("TV", totemPark.getItems().get(3).getName());
 
-        assertEquals(4, walterGage.getItems().size());
-        assertEquals(3, placeVanier.getItems().size());
-        assertEquals(4, totemPark.getItems().size());
-        assertEquals(3, exchange.getItems().size());
     }
 }
