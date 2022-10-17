@@ -19,6 +19,18 @@ public class LoginSystem {
         this.username = username;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public Residence getUserResidence() {
+        return userResidence;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     // EFFECTS : shows if the username(return -2) doesn't exist or the username and password
     // do not match (return -1) or returns the index pointed to the buyer
     public Integer buyerLogin() {

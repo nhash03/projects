@@ -34,6 +34,8 @@ public class TestSeller {
         assertEquals("nhash03", seller1.getUsername());
         assertEquals("12abc", seller1.getPassword());
         assertEquals(0, seller1.getItemsToSell().size());
+        assertTrue(walterGage.getSellers().contains(seller1));
+        assertEquals("12abc",walterGage.getSellersAccounts().get("nhash03"));
     }
 
     @Test

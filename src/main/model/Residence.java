@@ -87,7 +87,6 @@ public class Residence {
     // EFFECTS : add a new seller to the residence's list and comment if adding was
     // successful or not.
     public void addNewSeller(Seller s) {
-//        handleAddingObject(s, sellers, "seller");
         sellers.add(s);
         sellersAccounts.put(s.getUsername(), s.getPassword());
     }

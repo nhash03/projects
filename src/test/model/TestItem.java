@@ -30,7 +30,8 @@ public class TestItem {
         assertNull(i1.getDescription());
         assertEquals(2.50, i1.getPrice());
         assertEquals(residence, i1.getLocation());
-        assertEquals(0, i1.getId());
+        assertNotNull(i1.getId());
+        assertTrue(i1.getId() <= 99999);
         assertEquals(s1, i1.getSeller());
         assertNull(i1.getBuyer());
         assertTrue(i1.isAvailable());
@@ -45,13 +46,6 @@ public class TestItem {
     @Test
     public void testGetLocation() {
         assertEquals(residence, i2.getLocation());
-    }
-
-    @Test
-    public void getID(){
-        residence.addNewItem(i1);
-        Item newItem = new Item("sofa", 1000, residence, s2);
-        assertEquals(1, newItem.getId());
     }
 
     @Test
@@ -77,6 +71,12 @@ public class TestItem {
     }
 
     @Test
+    public void testSetName() {
+        i1.setName("new name");
+        assertEquals("new name", i1.getName());
+    }
+
+    @Test
     public void testSetPrice() {
         i1.setPrice(3.33);
         assertEquals(3.33, i1.getPrice());
@@ -99,11 +99,10 @@ public class TestItem {
 
     @Test
     public void testSetID() {
-        assertEquals(0, i1.setID());
-
-        residence.addNewItem(i1);
-        residence.addNewItem(i2);
-        assertEquals(2, i2.setID());
+        Integer id = i2.setID();
+        assertNotNull(id);
+        assertTrue(0 <= id);
+        assertTrue(id <= 99999);
     }
 
     @Test

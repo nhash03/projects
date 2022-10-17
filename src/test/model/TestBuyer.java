@@ -35,6 +35,8 @@ public class TestBuyer {
         assertEquals("nhash03", buyer1.getUsername());
         assertEquals("12abc", buyer1.getPassword());
         assertEquals(0, buyer1.getAlreadyBought().size());
+        assertTrue(walterGage.getBuyers().contains(buyer1));
+        assertEquals("12abc",walterGage.getBuyersAccounts().get("nhash03"));
     }
 
     @Test
@@ -149,7 +151,7 @@ public class TestBuyer {
     }
 
     @Test
-    public void testRemove(){
+    public void testRemoveFromWishlist(){
         buyer1.removeFromWishlist(milk);
         assertEquals(0, buyer1.getItemsToBuy().size());
 

@@ -27,10 +27,13 @@ public class TestResidence {
 
     @Test
     public void testConstructors() {
-        assertEquals("WG", residence.getName());
-        assertEquals(0, residence.getBuyers().size());
-        assertEquals(0,residence.getSellers().size());
-        assertEquals(0, residence.getItems().size());
+        Residence emptyRes = new Residence("Blah blah");
+        assertEquals("Blah blah", emptyRes.getName());
+        assertEquals(0, emptyRes.getBuyers().size());
+        assertEquals(0,emptyRes.getSellers().size());
+        assertEquals(0, emptyRes.getItems().size());
+        assertEquals(0, emptyRes.getBuyersAccounts().size());
+        assertEquals(0, emptyRes.getSellersAccounts().size());
 
         residence.addNewItem(i1);
         residence.addNewItem(i2);
@@ -38,51 +41,58 @@ public class TestResidence {
         assertTrue(residence.getItems().contains(i1));
         assertTrue(residence.getItems().contains(i2));
 
-        residence.addNewBuyer(b1);
-        residence.addNewBuyer(b2);
         assertEquals(2, residence.getBuyers().size());
         assertTrue(residence.getBuyers().contains(b2));
         assertTrue(residence.getBuyers().contains(b1));
+        assertEquals(2, residence.getBuyersAccounts().size());
+        assertEquals("123abc", residence.getBuyersAccounts().get("nhash03"));
+        assertEquals("a1b2", residence.getBuyersAccounts().get("eligh"));
 
-        residence.addNewSeller(s1);
-        residence.addNewSeller(s2);
         assertEquals(2, residence.getSellers().size());
         assertTrue(residence.getSellers().contains(s1));
         assertTrue(residence.getSellers().contains(s2));
+        assertEquals(2, residence.getSellersAccounts().size());
+        assertEquals("123", residence.getSellersAccounts().get("shad"));
+        assertEquals("abc-1", residence.getSellersAccounts().get("avahmadi"));
     }
 
     @Test
     public void testAddNewSeller() {
-        residence.addNewSeller(s1);
-        assertTrue(residence.getSellers().contains(s1));
-        assertEquals(1, residence.getSellers().size());
+        Residence newRes = new Residence("aaa");
+        Seller newSell = new Seller("new", newRes, "meow", "1234");
+        residence.addNewSeller(newSell);
+        assertTrue(residence.getSellers().contains(newSell));
+        assertEquals(3, residence.getSellers().size());
+        assertEquals(3, residence.getSellersAccounts().size());
+        assertEquals("1234", residence.getSellersAccounts().get("meow"));
 
-        residence.addNewSeller(s2);
-        assertTrue(residence.getSellers().contains(s1));
-        assertTrue(residence.getSellers().contains(s2));
-        assertEquals(2, residence.getSellers().size());
-
-        residence.addNewSeller(s1);
-        assertTrue(residence.getSellers().contains(s1));
-        assertTrue(residence.getSellers().contains(s2));
-        assertEquals(2, residence.getSellers().size());
+        Seller newSell2 = new Seller("new2", newRes, "meow2", "12345");
+        residence.addNewSeller(newSell2);
+        assertTrue(residence.getSellers().contains(newSell));
+        assertTrue(residence.getSellers().contains(newSell2));
+        assertEquals(4, residence.getSellers().size());
+        assertEquals(4, residence.getSellersAccounts().size());
+        assertEquals("12345", residence.getSellersAccounts().get("meow2"));
     }
 
     @Test
     public void testAddNewBuyer() {
-        residence.addNewBuyer(b1);
-        assertTrue(residence.getBuyers().contains(b1));
-        assertEquals(1, residence.getBuyers().size());
+        Residence newRes = new Residence("aaa");
+        Buyer newBuy = new Buyer("new", newRes, "meow", "1234");
+        residence.addNewBuyer(newBuy);
+        assertTrue(residence.getBuyers().contains(newBuy));
+        assertEquals(3, residence.getBuyers().size());
+        assertEquals(3, residence.getBuyersAccounts().size());
+        assertEquals("1234", residence.getBuyersAccounts().get("meow"));
 
-        residence.addNewBuyer(b2);
-        assertTrue(residence.getBuyers().contains(b1));
-        assertTrue(residence.getBuyers().contains(b2));
-        assertEquals(2, residence.getBuyers().size());
+        Buyer newBuy2 = new Buyer("new2", newRes, "meow2", "12345");
+        residence.addNewBuyer(newBuy2);
+        assertTrue(residence.getBuyers().contains(newBuy));
+        assertTrue(residence.getBuyers().contains(newBuy2));
+        assertEquals(4, residence.getBuyers().size());
+        assertEquals(4, residence.getBuyersAccounts().size());
+        assertEquals("12345", residence.getBuyersAccounts().get("meow2"));
 
-        residence.addNewBuyer(b1);
-        assertTrue(residence.getBuyers().contains(b1));
-        assertTrue(residence.getBuyers().contains(b2));
-        assertEquals(2, residence.getBuyers().size());
     }
 
     @Test
@@ -104,11 +114,20 @@ public class TestResidence {
     @Test
     public void testSetDefaultItems() {
         Residence walterGage = new Residence("Walter Gage");
+        walterGage.setDefaultItems();
         Residence placeVanier = new Residence("Place Vanier");
+        placeVanier.setDefaultItems();
         Residence exchange = new Residence("Exchange");
+        exchange.setDefaultItems();
         Residence totemPark = new Residence("Totem Park");
+        totemPark.setDefaultItems();
+//        Seller s4 = new Seller("seller4", new Residence("Place Vanier"), "101", "jkl");
+//        Seller se1 = new Seller("seller1", new Residence("Walter Gage"), "123", "abc");
 
         assertEquals(4, walterGage.getItems().size());
-        assertTrue(walterGage.getItems().contains(new Item("milk", 1.55, new Residence("Walter Gage"), s1)));
+        assertEquals(3, placeVanier.getItems().size());
+//        assertTrue(placeVanier.getItems().contains(new Item("coke", 1.55, new Residence("Place Vanier"), s4)));
+        assertEquals(4, totemPark.getItems().size());
+        assertEquals(3, exchange.getItems().size());
     }
 }
