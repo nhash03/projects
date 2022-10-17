@@ -20,6 +20,7 @@ public class Buyer extends User {
         super(nm, res, un, pass);
         itemsToBuy = new ArrayList<>();
         alreadyBought = new ArrayList<>();
+        res.addNewBuyer(this);
     }
 
     public List<Item> getItemsToBuy() {

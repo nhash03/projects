@@ -16,7 +16,7 @@ public class TestResidence {
 
     @BeforeEach
     public void setup() {
-        residence = new Residence("Walter Gage");
+        residence = new Residence("WG");
         b1 = new Buyer("Negin", residence, "nhash03", "123abc");
         b2 = new Buyer("Elina", residence, "eligh", "a1b2");
         s1 = new Seller("Shadan", residence, "shad", "123");
@@ -27,7 +27,7 @@ public class TestResidence {
 
     @Test
     public void testConstructors() {
-        assertEquals("Walter Gage", residence.getName());
+        assertEquals("WG", residence.getName());
         assertEquals(0, residence.getBuyers().size());
         assertEquals(0,residence.getSellers().size());
         assertEquals(0, residence.getItems().size());
@@ -102,12 +102,13 @@ public class TestResidence {
     }
 
     @Test
-    public void testHandleAddingObject() {
-        residence.addNewBuyer(b1);
-        assertEquals("Such a buyer has already existed in the residence",
-                residence.handleAddingObject(b1, residence.getBuyers(), "buyer"));
+    public void testSetDefaultItems() {
+        Residence walterGage = new Residence("Walter Gage");
+        Residence placeVanier = new Residence("Place Vanier");
+        Residence exchange = new Residence("Exchange");
+        Residence totemPark = new Residence("Totem Park");
 
-        assertEquals("The buyer successfully added to the residence's list",
-                residence.handleAddingObject(b2, residence.getBuyers(), "buyer"));
+        assertEquals(4, walterGage.getItems().size());
+        assertTrue(walterGage.getItems().contains(new Item("milk", 1.55, new Residence("Walter Gage"), s1)));
     }
 }

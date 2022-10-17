@@ -17,12 +17,15 @@ public class Seller extends User {
     public Seller(String nm, Residence res, String un, String pass) {
         super(nm, res, un, pass);
         itemsToSell = new ArrayList<>();
+        res.addNewSeller(this);
     }
 
     public List<Item> getItemsToSell() {
         return itemsToSell;
     }
 
+    // MODIFIES : this
+    // EFFECTS : add an item to the selling list
     public void addItemToSell(Item i) {
         itemsToSell.add(i);
     }

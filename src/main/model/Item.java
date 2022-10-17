@@ -1,5 +1,9 @@
 package model;
 
+import java.util.Random;
+
+import static java.lang.Integer.parseInt;
+
 // Representing an item of a specific seller in a certain location with its unique ID.
 // The item has its own description, name and price (in CAD) and also represents its seller
 // and buyer(if available).
@@ -8,7 +12,7 @@ public class Item {
     private String description;
     private double price;
     private Residence location;
-    private final Integer id;
+    private Integer id;
     private Seller seller;
     private Buyer buyer;
     private Boolean availability;
@@ -61,6 +65,10 @@ public class Item {
         return this.availability;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -82,7 +90,9 @@ public class Item {
     // MODIFIES : this
     // EFFECTS : set the item id to something unique between all other items in the location
     public Integer setID() {
-        return location.getItems().size();
+        Random rnd = new Random();
+        int number = rnd.nextInt(99999);
+        return parseInt(String.format("%06d", number));
     }
 
     // MODIFIES : this
