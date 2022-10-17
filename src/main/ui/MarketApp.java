@@ -34,7 +34,7 @@ public class MarketApp {
         while (stillRunning) {
             displayMenu();
             command = input.next();
-            command = command.toLowerCase().strip();
+            command = command.toLowerCase();
 
             if (command.equals("q")) {
                 stillRunning = false;
@@ -74,7 +74,7 @@ public class MarketApp {
         if (command.equals("b")) {
             System.out.println("Are you an existing buyer? Type 'yes' or 'no'.");
             String isExistingBuyer = input.next();
-            isExistingBuyer = isExistingBuyer.toLowerCase().strip();
+            isExistingBuyer = isExistingBuyer.toLowerCase();
             if (isExistingBuyer.contains("yes")) {
                 handleBuyerLoggingIn();
             } else if (isExistingBuyer.contains("no")) {
@@ -85,7 +85,7 @@ public class MarketApp {
         } else if (command.equals("s")) {
             System.out.println("Are you an existing seller? Type 'yes' or 'no'.");
             String isExistingSeller = input.next();
-            isExistingSeller = isExistingSeller.toLowerCase().strip();
+            isExistingSeller = isExistingSeller.toLowerCase();
             if (isExistingSeller.contains("yes")) {
                 handleSellerLoggingIn();
             } else if (isExistingSeller.contains("no")) {
@@ -193,7 +193,7 @@ public class MarketApp {
         System.out.println("\tt -> Totem Park");
         System.out.println("\tp -> Place Vanier");
         Residence residence;
-        String residenceCommand = info.next().toLowerCase().strip();
+        String residenceCommand = info.next().toLowerCase();
         residence = handleResidence(residenceCommand);
         buyer = new Buyer(name, residence, username, password);
         makeNewBuyerAccount(buyer);
@@ -269,7 +269,7 @@ public class MarketApp {
         System.out.println("\nWhat do you want to do right now?");
         System.out.println("\t1 -> Add items to the shopping bag");
         System.out.println("\t2 -> Return to the previous menu");
-        String option = input.next().strip();
+        String option = input.next();
         if (option.equals("1")) {
             System.out.println("Type the ID of each item you want in a single line.");
             System.out.println("Type 'finish' when you're done");
@@ -465,7 +465,6 @@ public class MarketApp {
         displayItemsToSell(seller);
         System.out.println("Press 1 to return to the previous menu.");
         String choice = options.next();
-        choice = choice.strip();
         if (choice.equals("1")) {
             makeNewSellerAccount(seller);
         }
@@ -475,7 +474,7 @@ public class MarketApp {
     private void displayModifyingItems(Seller seller) {
         displayItemsToSell(seller);
         System.out.println("Type the item IDs that you want to modify or 'finish' to return to the previous menu: ");
-        String idToModify = options.next().toLowerCase().strip();
+        String idToModify = options.next().toLowerCase();
         while (!idToModify.contains("finish")) {
             modifyById(seller, idToModify);
             System.out.println("Enter the next ID or 'finish':");
@@ -506,7 +505,7 @@ public class MarketApp {
         for (Item i: seller.getItemsToSell()) {
             if (i.getId() == parseInt(targetID)) {
                 System.out.println("Do you want to delete the item? Type 'yes' or 'no'.");
-                String toDelete = options.next().strip().toLowerCase();
+                String toDelete = options.next().toLowerCase();
                 if (toDelete.contains("yes")) {
                     seller.deleteItem(i);
                     break;
