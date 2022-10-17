@@ -54,6 +54,8 @@ public class Residence {
             items.add(new Item("coke", 1.55, new Residence("Place Vanier"), s4));
             items.add(new Item("coffee", 3.61, new Residence("Place Vanier"), s4));
             items.add(new Item("honey", 6.5, new Residence("Place Vanier"), s4));
+        } else {
+            return;
         }
         this.items = items;
     }
