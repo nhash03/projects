@@ -49,7 +49,7 @@ public class LoginSystem {
         return -2;
     }
 
-    // EFFECTS : shows if the username(return -2) doesn't exist or the username and password
+    //EFFECTS : shows if the username(return -2) doesn't exist or the username and password
     // do not match (return -1) or returns the index pointed to the seller
     public Integer sellerLogin() {
         HashMap<String, String> listOfUsers = userResidence.getSellersAccounts();
