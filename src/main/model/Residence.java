@@ -83,7 +83,7 @@ public class Residence {
         return sellersAccounts;
     }
 
-    //MODIFIES : this
+    // MODIFIES : this
     // EFFECTS : add a new seller to the residence's list and comment if adding was
     // successful or not.
     public void addNewSeller(Seller s) {

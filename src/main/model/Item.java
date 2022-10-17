@@ -95,7 +95,7 @@ public class Item {
         return parseInt(String.format("%06d", number));
     }
 
-    //MODIFIES : this
+    // MODIFIES : this
     // EFFECTS : the buyer b will buy the item if it's available; so it
     // becomes unavailable and take b as its buyer.
     public void buy(Buyer b) {

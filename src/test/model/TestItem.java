@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestItem {
     Residence residence;
-    Buyer b1;
-    Buyer b2;
-    Seller s1;
+    Buyer buyer1;
+    Buyer buyer2;
+    Seller seller1;
     Seller s2;
     Item i1;
     Item i2;
@@ -16,11 +16,11 @@ public class TestItem {
     @BeforeEach
     public void setup() {
         residence = new Residence("Walter Gage");
-        b1 = new Buyer("Negin", residence, "nhash03", "123abc");
-        b2 = new Buyer("Elina", residence, "eligh", "a1b2");
-        s1 = new Seller("Shadan", residence, "shad", "123");
+        buyer1 = new Buyer("Negin", residence, "nhash03", "123abc");
+        buyer2 = new Buyer("Elina", residence, "eligh", "a1b2");
+        seller1 = new Seller("Shadan", residence, "shad", "123");
         s2 = new Seller("Ava", residence, "avahmadi", "abc-1");
-        i1 = new Item("Milk", 2.50, residence, s1);
+        i1 = new Item("Milk", 2.50, residence, seller1);
         i2 = new Item("Yoghurt", 3.778, residence, s2);
     }
 
@@ -32,7 +32,7 @@ public class TestItem {
         assertEquals(residence, i1.getLocation());
         assertNotNull(i1.getId());
         assertTrue(i1.getId() <= 99999);
-        assertEquals(s1, i1.getSeller());
+        assertEquals(seller1, i1.getSeller());
         assertNull(i1.getBuyer());
         assertTrue(i1.isAvailable());
     }
@@ -50,8 +50,8 @@ public class TestItem {
 
     @Test
     public void testGetBuyer(){
-        i2.setBuyer(b2);
-        assertEquals(b2, i2.getBuyer());
+        i2.setBuyer(buyer2);
+        assertEquals(buyer2, i2.getBuyer());
     }
 
     @Test
@@ -84,8 +84,8 @@ public class TestItem {
 
     @Test
     public void testSetBuyer() {
-        i1.setBuyer(b1);
-        assertEquals(b1, i1.getBuyer());
+        i1.setBuyer(buyer1);
+        assertEquals(buyer1, i1.getBuyer());
     }
 
     @Test
@@ -107,12 +107,12 @@ public class TestItem {
 
     @Test
     public void testBuy() {
-        i1.buy(b1);
-        assertEquals(b1, i1.getBuyer());
+        i1.buy(buyer1);
+        assertEquals(buyer1, i1.getBuyer());
         assertFalse(i1.isAvailable());
 
         i2.switchAvailability();
-        i2.buy(b1);
+        i2.buy(buyer1);
         assertNull(i2.getBuyer());
         assertFalse(i2.isAvailable());
     }

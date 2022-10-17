@@ -9,7 +9,7 @@ abstract class User {
     protected String password;
     protected double balance;
 
-    //REQUIRES: length of name, username and password > 0 and unique
+    // REQUIRES: length of name, username and password > 0 and unique
     //           username and password
     // EFFECTS : balance is set to 0; user's username and pass
     //           are personal; The user is living in a given residence.

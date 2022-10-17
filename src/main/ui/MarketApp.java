@@ -7,7 +7,7 @@ import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
-//Residence Market application
+// Residence Market application
 public class MarketApp {
     private Buyer buyer;
     private Seller seller;

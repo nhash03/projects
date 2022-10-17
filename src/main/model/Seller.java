@@ -9,7 +9,7 @@ import java.util.List;
 public class Seller extends User {
     private List<Item> itemsToSell;
 
-    //REQUIRES: length of name, username and password > 0 and unique
+    // REQUIRES: length of name, username and password > 0 and unique
     //           username and password
     // EFFECTS : balance is set to 0; seller's username and pass
     //           are personal; Initially no history of items that has

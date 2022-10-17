@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestBuyer {
 
     Buyer buyer1;
-    Buyer testBuyer;
+    Buyer testingBuyer;
     Residence walterGage;
     Residence exchange;
     Item milk;
@@ -20,7 +20,7 @@ public class TestBuyer {
         walterGage = new Residence("Walter Gage");
         exchange = new Residence("Exchange");
         buyer1 = new Buyer("Negin", walterGage, "nhash03", "12abc");
-        testBuyer = new Buyer("Maggie", exchange, "magmag", "123e");
+        testingBuyer = new Buyer("Maggie", exchange, "magmag", "123e");
         mainSeller = new Seller("Parshan", walterGage, "pjavan", "123a1");
         milk = new Item("Milk", 2.50, walterGage, mainSeller);
         yoghurt = new Item("Yoghurt", 3.778, walterGage, mainSeller);
@@ -41,48 +41,48 @@ public class TestBuyer {
 
     @Test
     public void testSetBalance() {
-        testBuyer.setBalance(12.5);
-        assertEquals(12.5, testBuyer.getBalance());
+        testingBuyer.setBalance(12.5);
+        assertEquals(12.5, testingBuyer.getBalance());
     }
 
     @Test
     public void testSetLocation() {
-        testBuyer.setLocation(exchange);
-        assertEquals(exchange, testBuyer.getLocation());
+        testingBuyer.setLocation(exchange);
+        assertEquals(exchange, testingBuyer.getLocation());
     }
 
     @Test
     public void testSetPassword() {
-        testBuyer.setPassword("123-abc");
-        assertEquals("123-abc", testBuyer.getPassword());
+        testingBuyer.setPassword("123-abc");
+        assertEquals("123-abc", testingBuyer.getPassword());
     }
 
     @Test
     public void testGetName() {
-        assertEquals("Maggie", testBuyer.getName());
+        assertEquals("Maggie", testingBuyer.getName());
     }
 
     @Test
     public void testGetLocation() {
-        testBuyer.setLocation(exchange);
-        assertEquals(exchange, testBuyer.getLocation());
+        testingBuyer.setLocation(exchange);
+        assertEquals(exchange, testingBuyer.getLocation());
     }
 
     @Test
     public void testGetBalance() {
-        testBuyer.setBalance(2000);
-        assertEquals(2000, testBuyer.getBalance());
+        testingBuyer.setBalance(2000);
+        assertEquals(2000, testingBuyer.getBalance());
     }
 
     @Test
     public void testGetPassword() {
-        testBuyer.setPassword("a1-2b;");
-        assertEquals("a1-2b;", testBuyer.getPassword());
+        testingBuyer.setPassword("a1-2b;");
+        assertEquals("a1-2b;", testingBuyer.getPassword());
     }
 
     @Test
     public void testGetUsername() {
-        assertEquals("magmag", testBuyer.getUsername());
+        assertEquals("magmag", testingBuyer.getUsername());
     }
 
     @Test

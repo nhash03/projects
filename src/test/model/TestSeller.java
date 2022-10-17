@@ -3,8 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,14 +12,14 @@ public class TestSeller {
     Residence exchange;
     Item milk;
     Item yoghurt;
-    Buyer mainBuyer;
+    Buyer buyer;
 
     @BeforeEach
     public void setup() {
         walterGage = new Residence("Walter Gage");
         exchange = new Residence("Exchange");
         seller1 = new Seller("Negin", walterGage, "nhash03", "12abc");
-        mainBuyer = new Buyer("Parshan", walterGage, "pjavan", "123a1");
+        buyer = new Buyer("Parshan", walterGage, "pjavan", "123a1");
         milk = new Item("Milk", 2.50, walterGage, seller1);
         yoghurt = new Item("Yoghurt", 3.778, walterGage, seller1);
     }

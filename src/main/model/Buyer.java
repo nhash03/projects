@@ -71,7 +71,7 @@ public class Buyer extends User {
         return "You don't have enough money to buy " + i.getName();
     }
 
-    //MODIFIES : this
+    // MODIFIES : this
     // EFFECTS : remove the item from the wish list if it exists there
     public void removeFromWishlist(Item i) {
         if (this.getItemsToBuy().contains(i)) {

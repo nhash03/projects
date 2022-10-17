@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestLoginSystem {
     LoginSystem logSys;
     Residence res;
-    Buyer b1;
+    Buyer buyer;
 
     @BeforeEach
     void setup() {

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestResidence {
     Residence residence;
-    Buyer b1;
+    Buyer buyer1;
     Buyer b2;
     Seller s1;
     Seller s2;
@@ -17,7 +17,7 @@ public class TestResidence {
     @BeforeEach
     public void setup() {
         residence = new Residence("WG");
-        b1 = new Buyer("Negin", residence, "nhash03", "123abc");
+        buyer1 = new Buyer("Negin", residence, "nhash03", "123abc");
         b2 = new Buyer("Elina", residence, "eligh", "a1b2");
         s1 = new Seller("Shadan", residence, "shad", "123");
         s2 = new Seller("Ava", residence, "avahmadi", "abc-1");
@@ -43,7 +43,7 @@ public class TestResidence {
 
         assertEquals(2, residence.getBuyers().size());
         assertTrue(residence.getBuyers().contains(b2));
-        assertTrue(residence.getBuyers().contains(b1));
+        assertTrue(residence.getBuyers().contains(buyer1));
         assertEquals(2, residence.getBuyersAccounts().size());
         assertEquals("123abc", residence.getBuyersAccounts().get("nhash03"));
         assertEquals("a1b2", residence.getBuyersAccounts().get("eligh"));
