@@ -38,3 +38,6 @@ hop on the elevator and knock on your neighbor's door!
 - As a user, I want to see how much should I pay for the items that are in my bag.
 - As a user, I want to be able to remove my own item from the "available items" list.
 - As a user, I want to be able to choose the residence where I live.
+- As a user, I want to be able to save my shopping list (as a buyer) or the
+items that I have added to my residence list (as a seller).
+- As a user, I want to be able to logging in and get my previous saved states (wishlist, history and etc.)
