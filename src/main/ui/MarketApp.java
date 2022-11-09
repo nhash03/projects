@@ -2,34 +2,47 @@ package ui;
 
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
 // Residence Market application
 public class MarketApp {
+    private static final String JSON_STORE = "./data/Residences.json";
+    private Residences residences;
     private Buyer buyer;
     private Seller seller;
     private Scanner input;
-    private Scanner info;
-    private Scanner options;
     private Residence walterGage;
     private Residence exchange;
     private Residence totemPark;
     private Residence placeVanier;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    boolean stillRunning = true;
 
     // EFFECTS : tuns the market application
-    public MarketApp() {
+    public MarketApp() throws IOException {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        residences = new Residences();
+        input = new Scanner(System.in);
         init();
         runMarket();
     }
 
     // MODIFIES : this
     // EFFECTS : show the main user menu to choose between Buyer or Seller or quit
-    private void runMarket() {
-        boolean stillRunning = true;
-        String command;
+    private void runMarket() throws IOException {
+
+        String command = null;
+        input = new Scanner(System.in);
 
         while (stillRunning) {
             displayMenu();
@@ -42,22 +55,20 @@ public class MarketApp {
                 processing(command);
             }
         }
+        saveResidences();
         System.out.println("See you later! Byeeee!");
     }
 
     // MODIFIES : this
     // EFFECTS : initializes the residences
     private void init() {
-        input = new Scanner(System.in);
         input.useDelimiter("\n");
-        walterGage = new Residence("Walter Gage");
-        walterGage.setDefaultItems();
-        placeVanier = new Residence("Place Vanier");
-        placeVanier.setDefaultItems();
-        exchange = new Residence("Exchange");
-        exchange.setDefaultItems();
-        totemPark = new Residence("Totem Park");
-        totemPark.setDefaultItems();
+
+        loadResidences();
+        walterGage = residences.getResidences().get(0);
+        placeVanier = residences.getResidences().get(3);
+        exchange = residences.getResidences().get(1);
+        totemPark = residences.getResidences().get(2);
     }
 
     // EFFECTS : displays menu of options to user
@@ -70,7 +81,7 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : processes user command and see if the user already exists or not
-    private void processing(String command) {
+    private void processing(String command) throws IOException {
         if (command.equals("b")) {
             System.out.println("Are you an existing buyer? Type 'yes' or 'no'.");
             String isExistingBuyer = input.next();
@@ -98,7 +109,7 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : processes logging in information of a seller
-    private void handleSellerLoggingIn() {
+    private void handleSellerLoggingIn() throws IOException {
         System.out.println("\nPlease enter your username: ");
         String username = input.next();
         System.out.println("\nPlease enter your password: ");
@@ -113,13 +124,13 @@ public class MarketApp {
         Residence residence = handleResidence(residenceCommand);
         LoginSystem sellerLogin = new LoginSystem(residence, username, password);
         Integer loginIndex = sellerLogin.sellerLogin();
-        handleSellerLoginIndex(loginIndex, residence.getSellers());
+        handleSellerLoginIndex(loginIndex, sellerLogin.getUserResidence().getSellers());
     }
 
     // MODIFIES : this
     // EFFECTS : process the logging in based on the provided information
     // and returns if the seller exists in the residence or the information is incorrect
-    private void handleSellerLoginIndex(Integer index, List<Seller> userList) {
+    private void handleSellerLoginIndex(Integer index, List<Seller> userList) throws IOException {
         if (index == -1 | index == -2) {
             System.out.println("Username and Password does not match.");
             System.out.println("Press 1 to register.");
@@ -137,7 +148,7 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : processes logging in information of a buyer
-    private void handleBuyerLoggingIn() {
+    private void handleBuyerLoggingIn() throws IOException {
         System.out.println("\nPlease enter your username: ");
         String username = input.next();
         System.out.println("\nPlease enter your password: ");
@@ -152,13 +163,13 @@ public class MarketApp {
         Residence residence = handleResidence(residenceCommand);
         LoginSystem buyerLogin = new LoginSystem(residence, username, password);
         Integer loginIndex = buyerLogin.buyerLogin();
-        handleBuyerLoginIndex(loginIndex, residence.getBuyers());
+        handleBuyerLoginIndex(loginIndex, buyerLogin.getUserResidence().getBuyers());
     }
 
     // MODIFIES : this
     // EFFECTS : process the logging in based on the provided information
     // and returns if the buyer exists in the residence or the information is incorrect
-    private void handleBuyerLoginIndex(Integer index, List<Buyer> userList) {
+    private void handleBuyerLoginIndex(Integer index, List<Buyer> userList) throws IOException {
         if (index == -1 | index == -2) {
             System.out.println("Username and Password does not match.");
             System.out.println("Press 1 to register.");
@@ -176,16 +187,16 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : displays a signing in form for a new buyer and create a new buyer account
-    private void displayBuyerSignIn() {
-        info = new Scanner(System.in);
+    private void displayBuyerSignIn() throws IOException {
+//        input = new Scanner(System.in);
         System.out.println("\nPlease enter your name: ");
-        String name = info.next();
+        String name = input.next();
 
         System.out.println("\nPlease enter your personal username: ");
-        String username = info.next();
+        String username = input.next();
 
         System.out.println("\nPlease enter your personal password: ");
-        String password = info.next();
+        String password = input.next();
 
         System.out.println("\nPlease select your residence: ");
         System.out.println("\te -> Exchange");
@@ -193,14 +204,14 @@ public class MarketApp {
         System.out.println("\tt -> Totem Park");
         System.out.println("\tp -> Place Vanier");
         Residence residence;
-        String residenceCommand = info.next().toLowerCase();
+        String residenceCommand = input.next().toLowerCase();
         residence = handleResidence(residenceCommand);
         buyer = new Buyer(name, residence, username, password);
         makeNewBuyerAccount(buyer);
     }
 
     // EFFECTS : returns the residence based on its initials
-    private Residence handleResidence(String resCommand) {
+    private Residence handleResidence(String resCommand) throws IOException {
         Residence res = null;
         switch (resCommand) {
             case("e") :
@@ -224,47 +235,48 @@ public class MarketApp {
     }
 
     // MODIFIES : display the buyer page and provided options to a buyer
-    private void makeNewBuyerAccount(Buyer b) {
-        options = new Scanner(System.in);
+    private void makeNewBuyerAccount(Buyer b) throws IOException {
+//        input = new Scanner(System.in);
         boolean stillShoppingMenu = true;
 
-        while (stillShoppingMenu) {
-            System.out.println("\nWhat do you want to do? ");
-            System.out.println("\t1 -> Visit the shopping bag");
-            System.out.println("\t2 -> Visit previous purchases");
-            System.out.println("\t3 -> Start shopping!");
-            System.out.println("\t4 -> Set the balance of your account");
-            System.out.println("\t5 -> Return to main menu");
-            String option = options.next();
+//        while (stillShoppingMenu) {
+        System.out.println("\nWhat do you want to do? ");
+        System.out.println("\t1 -> Visit the shopping bag");
+        System.out.println("\t2 -> Visit previous purchases");
+        System.out.println("\t3 -> Start shopping!");
+        System.out.println("\t4 -> Set the balance of your account");
+        System.out.println("\t5 -> Return to main menu");
+        String option = input.next();
 
-            if (option.equals("1")) {
-                displayShoppingBag(b);
-            } else if (option.equals("2")) {
-                displayPreviousPurchases(b);
-            } else if (option.equals("3")) {
-                displayItemsToBuy(b);
-            } else if (option.equals("4")) {
-                displaySetBalance(b);
-            } else if (option.equals("5")) {
-                stillShoppingMenu = false;
-                runMarket();
-            }
+        if (option.equals("1")) {
+            displayShoppingBag(b);
+        } else if (option.equals("2")) {
+            displayPreviousPurchases(b);
+        } else if (option.equals("3")) {
+            displayItemsToBuy(b);
+        } else if (option.equals("4")) {
+            displaySetBalance(b);
+        } else if (option.equals("5")) {
+            stillShoppingMenu = false;
+            stillRunning = false;
         }
     }
 
+
     // MODIFIES : this
     // EFFECTS : display a page to set a new balance and set a new balance
-    private void displaySetBalance(Buyer b) {
+    private void displaySetBalance(Buyer b) throws IOException {
         System.out.println("\nYour current balance is " + b.getBalance());
         System.out.println("How much do you want your balance to be?");
-        String targetBalanceStr = options.next();
+        String targetBalanceStr = input.next();
         double targetBalance = Double.parseDouble(targetBalanceStr);
         b.setBalance(targetBalance);
+        makeNewBuyerAccount(b);
     }
 
     // EFFECTS : display items in the residence and display options of what can be done with items
     // The buyer can add it to the wishlist or return to the previous page.
-    private void displayItemsToBuy(Buyer b) {
+    private void displayItemsToBuy(Buyer b) throws IOException {
         displayItemsInResidence(b.getLocation());
         System.out.println("\nWhat do you want to do right now?");
         System.out.println("\t1 -> Add items to the shopping bag");
@@ -284,12 +296,13 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : add item to the buyer's shopping list
-    private void addingItemsToBag(Buyer b) {
+    private void addingItemsToBag(Buyer b) throws IOException {
         String id = input.next();
         while (!id.contains("finish")) {
             addById(b, id);
             id = input.next();
         }
+        makeNewBuyerAccount(b);
     }
 
     // EFFECTS : display only available items in the given residence
@@ -322,23 +335,23 @@ public class MarketApp {
     }
 
     // EFFECTS : display the previous purchases of the buyer
-    private void displayPreviousPurchases(Buyer b) {
-        options = new Scanner(System.in);
+    private void displayPreviousPurchases(Buyer b) throws IOException {
+//        input = new Scanner(System.in);
         displayListItem(b.getAlreadyBought());
         System.out.println("Press anything to return to the previous menu.");
-        String decision = options.next();
+        makeNewBuyerAccount(b);
     }
 
     // EFFECTS : display the buyer's wish list (shopping bag)
-    private void displayShoppingBag(Buyer b) {
+    private void displayShoppingBag(Buyer b) throws IOException {
         displayListItem(b.getItemsToBuy());
         handleShoppingBagMenu(b);
     }
 
     // EFFECTS : display options that can be done in the buyer's shopping bag : returning to the previous menu,
     // calculating sum of items' price and removing item
-    private void handleShoppingBagMenu(Buyer b) {
-        options = new Scanner(System.in);
+    private void handleShoppingBagMenu(Buyer b) throws IOException {
+//        input = new Scanner(System.in);
         boolean stayOnPage = true;
         while (stayOnPage) {
             System.out.println("What do you want to do now? ");
@@ -346,7 +359,7 @@ public class MarketApp {
             System.out.println("\t2 -> See how much you should pay");
             System.out.println("\t3 -> Remove an item from the list");
             System.out.println("\t4 -> Pay for items");
-            String option = options.next();
+            String option = input.next();
             if (option.equals("1")) {
                 makeNewBuyerAccount(b);
                 stayOnPage = false;
@@ -354,7 +367,7 @@ public class MarketApp {
                 System.out.println("You should pay " + b.howMuchToPay() + " to buy all of the items.");
             } else if (option.equals("3")) {
                 System.out.println("The ID of the item you want to remove: ");
-                String id = options.next();
+                String id = input.next();
                 removeByID(b, id);
             } else if (option.equals("4")) {
                 b.payForItems();
@@ -394,7 +407,7 @@ public class MarketApp {
         try {
             int idInteger = parseInt(id);
             for (Item i: b.getLocation().getItems()) {
-                if (i.getId() == idInteger) {
+                if (i.getId().equals(idInteger)) {
                     b.addItemToBuy(i);
                     System.out.println("Item " + i.getName() + " with ID " + id + " has successfully added.");
                 }
@@ -408,16 +421,16 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : displays a signing in form for a new seller and make a new seller account
-    private void displaySellerSignIn() {
-        info = new Scanner(System.in);
+    private void displaySellerSignIn() throws IOException {
+//        in = new Scanner(System.in);
         System.out.println("\nPlease enter your name: ");
-        String name = info.next();
+        String name = input.next();
 
         System.out.println("\nPlease enter your personal username: ");
-        String username = info.next();
+        String username = input.next();
 
         System.out.println("\nPlease enter your personal password: ");
-        String password = info.next();
+        String password = input.next();
 
         System.out.println("\nPlease select your residence: ");
         System.out.println("\te -> Exchange");
@@ -425,7 +438,7 @@ public class MarketApp {
         System.out.println("\tt -> Totem Park");
         System.out.println("\tp -> Place Vanier");
         System.out.println("\tNA -> residence not in the list");
-        String residenceCommand = info.next();
+        String residenceCommand = input.next();
         Residence residence = handleResidence(residenceCommand);
 
         seller = new Seller(name, residence, username, password);
@@ -433,52 +446,52 @@ public class MarketApp {
     }
 
     // MODIFIES : display the seller page and provided options to a seller
-    private void makeNewSellerAccount(Seller seller) {
-        options = new Scanner(System.in);
-        boolean stillSellingMenu = true;
+    private void makeNewSellerAccount(Seller seller) throws IOException {
+//        options = new Scanner(System.in);
+//        boolean stillSellingMenu = true;
 
-        while (stillSellingMenu) {
-            System.out.println("\nWhat do you want to do? ");
-            System.out.println("\t1 -> Add an item to the Residence's list");
-            System.out.println("\t2 -> Modify previous items");
-            System.out.println("\t3 -> Handle your account");
-            System.out.println("\t4 -> Return to the main menu");
-            String option = options.next();
+//        while (stillSellingMenu) {
+        System.out.println("\nWhat do you want to do? ");
+        System.out.println("\t1 -> Add an item to the Residence's list");
+        System.out.println("\t2 -> Modify previous items");
+        System.out.println("\t3 -> Handle your account");
+        System.out.println("\t4 -> Return to the main menu");
+        String option = input.next();
 
-            if (option.equals("1")) {
-                displayAddingItem(seller);
-            } else if (option.equals("2")) {
-                displayModifyingItems(seller);
-            } else if (option.equals("3")) {
-                displayHandlingSellerAccount(seller);
-            } else if (option.equals("4")) {
-                stillSellingMenu = false;
-                runMarket();
-            }
+        if (option.equals("1")) {
+            displayAddingItem(seller);
+        } else if (option.equals("2")) {
+            displayModifyingItems(seller);
+        } else if (option.equals("3")) {
+            displayHandlingSellerAccount(seller);
+        } else if (option.equals("4")) {
+//                stillSellingMenu = false;
+            stillRunning = false;
         }
     }
+//    }
 
     // EFFECTS : display a page for managing a seller account
-    private void displayHandlingSellerAccount(Seller seller) {
+    private void displayHandlingSellerAccount(Seller seller) throws IOException {
         System.out.println("Hello " + seller.getName() + "!");
         System.out.println("How is your life at " + seller.getLocation().getName());
         displayItemsToSell(seller);
         System.out.println("Press 1 to return to the previous menu.");
-        String choice = options.next();
+        String choice = input.next();
         if (choice.equals("1")) {
             makeNewSellerAccount(seller);
         }
     }
 
     // EFFECTS : display items of a seller and ask for the items' ID that he wants to modify
-    private void displayModifyingItems(Seller seller) {
+    private void displayModifyingItems(Seller seller) throws IOException {
         displayItemsToSell(seller);
         System.out.println("Type the item IDs that you want to modify or 'finish' to return to the previous menu: ");
-        String idToModify = options.next().toLowerCase();
+        String idToModify = input.next().toLowerCase();
         while (!idToModify.contains("finish")) {
             modifyById(seller, idToModify);
             System.out.println("Enter the next ID or 'finish':");
-            idToModify = options.next();
+            idToModify = input.next();
         }
         makeNewSellerAccount(seller);
     }
@@ -505,19 +518,19 @@ public class MarketApp {
         for (Item i: seller.getItemsToSell()) {
             if (i.getId() == parseInt(targetID)) {
                 System.out.println("Do you want to delete the item? Type 'yes' or 'no'.");
-                String toDelete = options.next().toLowerCase();
+                String toDelete = input.next().toLowerCase();
                 if (toDelete.contains("yes")) {
                     seller.deleteItem(i);
                     break;
                 } else if (toDelete.contains("no")) {
                     System.out.println("New name for the item: ");
-                    i.setName(options.next());
+                    i.setName(input.next());
                     System.out.println("New price: ");
-                    i.setPrice(Double.parseDouble(options.next()));
+                    i.setPrice(Double.parseDouble(input.next()));
                     System.out.println("Adding a description: ");
-                    i.setDescription(options.next());
+                    i.setDescription(input.next());
                     System.out.println("Do you want to switch the availability? Type 'yes' or 'no'.");
-                    String choice = options.next();
+                    String choice = input.next();
                     if (choice.equals("'yes'")) {
                         i.switchAvailability();
                     }
@@ -529,28 +542,47 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : display a form to a seller to add a specific item
-    private void displayAddingItem(Seller seller) {
+    private void displayAddingItem(Seller seller) throws IOException {
         System.out.println("\nPlease fill out the form below:");
         System.out.println("Name of the item: ");
-        String name = options.next();
+        String name = input.next();
         System.out.println("Price: ");
-        String priceString = options.next();
+        String priceString = input.next();
         System.out.println("Any description: ");
-        String description = options.next();
-        Item item = new Item(name, Double.parseDouble(priceString), seller.getLocation(), seller);
+        String description = input.next();
+        Item item = new Item(name, Double.parseDouble(priceString), seller.getLocation(), seller.getId());
         item.setDescription(description);
         seller.addItemToSell(item);
-        seller.getLocation().addNewItem(item);
+//        seller.getLocation().addNewItem(item);
         System.out.println("Item " + item.getName() + " created and added to the available items in the residence.");
-
         System.out.println("\nWhat's next?");
         System.out.println("\t1 -> Add more items");
         System.out.println("\t2 -> Return to the previous menu");
-        String option = options.next();
+        String option = input.next();
         if (option.equals("1")) {
             displayAddingItem(seller);
         } else if (option.equals("2")) {
             makeNewSellerAccount(seller);
+        }
+    }
+
+    private void saveResidences() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(residences);
+            jsonWriter.close();
+            System.out.println("Saved Residences to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    private void loadResidences() {
+        try {
+            residences = jsonReader.read();
+            System.out.println("Loaded residences from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

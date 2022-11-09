@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +21,8 @@ public class TestItem {
         buyer2 = new Buyer("Elina", residence, "eligh", "a1b2");
         seller1 = new Seller("Shadan", residence, "shad", "123");
         s2 = new Seller("Ava", residence, "avahmadi", "abc-1");
-        i1 = new Item("Milk", 2.50, residence, seller1);
-        i2 = new Item("Yoghurt", 3.778, residence, s2);
+        i1 = new Item("Milk", 2.50, residence, seller1.getId());
+        i2 = new Item("Yoghurt", 3.778, residence, s2.getId());
     }
 
     @Test
@@ -32,7 +33,7 @@ public class TestItem {
         assertEquals(residence, i1.getLocation());
         assertNotNull(i1.getId());
         assertTrue(i1.getId() <= 99999);
-        assertEquals(seller1, i1.getSeller());
+        assertEquals(seller1.getId(), i1.getSellerID());
         assertNull(i1.getBuyer());
         assertTrue(i1.isAvailable());
     }
@@ -61,8 +62,8 @@ public class TestItem {
 
     @Test
     public void testGetSeller(){
-        Item newItem = new Item("sofa", 1000, residence, s2);
-        assertEquals(s2, newItem.getSeller());
+        Item newItem = new Item("sofa", 1000, residence, s2.getId());
+        assertEquals(s2.getId(), newItem.getSellerID());
     }
     @Test
     public void testSetDescription() {
@@ -115,5 +116,18 @@ public class TestItem {
         i2.buy(buyer1);
         assertNull(i2.getBuyer());
         assertFalse(i2.isAvailable());
+    }
+
+    @Test
+    public void testToJson() {
+        i1.setDescription("good milk!");
+        i1.buy(buyer1);
+        JSONObject jsonObject = i1.toJson();
+        assertEquals("Milk", jsonObject.getString("name"));
+        assertEquals(2.5, jsonObject.optDouble("price"));
+        assertEquals("good milk!", jsonObject.getString("description"));
+        assertEquals(i1.getId(), jsonObject.optInt("ID"));
+        assertFalse(jsonObject.optBoolean("avail?"));
+        assertEquals(seller1.getId(), jsonObject.optLong("Seller ID"));
     }
 }

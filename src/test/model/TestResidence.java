@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,8 +22,8 @@ public class TestResidence {
         b2 = new Buyer("Elina", residence, "eligh", "a1b2");
         s1 = new Seller("Shadan", residence, "shad", "123");
         s2 = new Seller("Ava", residence, "avahmadi", "abc-1");
-        i1 = new Item("Milk", 2.50, residence, s1);
-        i2 = new Item("Yoghurt", 3.778, residence, s2);
+        i1 = new Item("Milk", 2.50, residence, s1.getId());
+        i2 = new Item("Yoghurt", 3.778, residence, s2.getId());
     }
 
     @Test
@@ -35,8 +36,8 @@ public class TestResidence {
         assertEquals(0, emptyRes.getBuyersAccounts().size());
         assertEquals(0, emptyRes.getSellersAccounts().size());
 
-        residence.addNewItem(i1);
-        residence.addNewItem(i2);
+//        residence.addNewItem(i1);
+//        residence.addNewItem(i2);
         assertEquals(2, residence.getItems().size());
         assertTrue(residence.getItems().contains(i1));
         assertTrue(residence.getItems().contains(i2));
@@ -97,53 +98,64 @@ public class TestResidence {
 
     @Test
     public void testAddNewItem() {
-        residence.addNewItem(i1);
+//        residence.addNewItem(i1);
         assertTrue(residence.getItems().contains(i1));
-        assertEquals(1, residence.getItems().size());
+        assertEquals(2, residence.getItems().size());
 
         residence.addNewItem(i1);
         assertTrue(residence.getItems().contains(i1));
-        assertEquals(2, residence.getItems().size());
+        assertEquals(3, residence.getItems().size());
 
         residence.addNewItem(i2);
         assertTrue(residence.getItems().contains(i1));
         assertTrue(residence.getItems().contains(i2));
-        assertEquals(3, residence.getItems().size());
+        assertEquals(4, residence.getItems().size());
     }
 
+//    @Test
+//    public void testSetDefaultItems() {
+//        Residence walterGage = new Residence("Walter Gage");
+//        walterGage.setDefaultItems();
+//        assertEquals(4, walterGage.getItems().size());
+//        assertEquals("milk", walterGage.getItems().get(0).getName());
+//        assertEquals("yoghurt", walterGage.getItems().get(1).getName());
+//        assertEquals("pencil", walterGage.getItems().get(2).getName());
+//        assertEquals("honey", walterGage.getItems().get(3).getName());
+//
+//        Residence placeVanier = new Residence("Place Vanier");
+//        placeVanier.setDefaultItems();
+//        assertEquals(3, placeVanier.getItems().size());
+//        assertEquals("coke", placeVanier.getItems().get(0).getName());
+//        assertEquals("coffee", placeVanier.getItems().get(1).getName());
+//        assertEquals("honey", placeVanier.getItems().get(2).getName());
+//
+//        Residence exchange = new Residence("Exchange");
+//        exchange.setDefaultItems();
+//        assertEquals(3, exchange.getItems().size());
+//        assertEquals("coke", exchange.getItems().get(0).getName());
+//        assertEquals("sugar", exchange.getItems().get(1).getName());
+//        assertEquals("honey", exchange.getItems().get(2).getName());
+//
+//        Residence totemPark = new Residence("Totem Park");
+//        totemPark.setDefaultItems();
+//        assertEquals(4, totemPark.getItems().size());
+//        assertEquals("banana", totemPark.getItems().get(0).getName());
+//        assertEquals("apple", totemPark.getItems().get(1).getName());
+//        assertEquals("pear", totemPark.getItems().get(2).getName());
+//        assertEquals("TV", totemPark.getItems().get(3).getName());
+//
+//        Residence nullRes = new Residence("null");
+//        assertEquals(0, nullRes.getItems().size());
+//    }
+
     @Test
-    public void testSetDefaultItems() {
-        Residence walterGage = new Residence("Walter Gage");
-        walterGage.setDefaultItems();
-        assertEquals(4, walterGage.getItems().size());
-        assertEquals("milk", walterGage.getItems().get(0).getName());
-        assertEquals("yoghurt", walterGage.getItems().get(1).getName());
-        assertEquals("pencil", walterGage.getItems().get(2).getName());
-        assertEquals("honey", walterGage.getItems().get(3).getName());
-
-        Residence placeVanier = new Residence("Place Vanier");
-        placeVanier.setDefaultItems();
-        assertEquals(3, placeVanier.getItems().size());
-        assertEquals("coke", placeVanier.getItems().get(0).getName());
-        assertEquals("coffee", placeVanier.getItems().get(1).getName());
-        assertEquals("honey", placeVanier.getItems().get(2).getName());
-
-        Residence exchange = new Residence("Exchange");
-        exchange.setDefaultItems();
-        assertEquals(3, exchange.getItems().size());
-        assertEquals("coke", exchange.getItems().get(0).getName());
-        assertEquals("sugar", exchange.getItems().get(1).getName());
-        assertEquals("honey", exchange.getItems().get(2).getName());
-
-        Residence totemPark = new Residence("Totem Park");
-        totemPark.setDefaultItems();
-        assertEquals(4, totemPark.getItems().size());
-        assertEquals("banana", totemPark.getItems().get(0).getName());
-        assertEquals("apple", totemPark.getItems().get(1).getName());
-        assertEquals("pear", totemPark.getItems().get(2).getName());
-        assertEquals("TV", totemPark.getItems().get(3).getName());
-
-        Residence nullRes = new Residence("null");
-        assertEquals(0, nullRes.getItems().size());
+    public void testToJson() {
+        JSONObject jsonObject = residence.toJson();
+        assertEquals(2, jsonObject.getJSONArray("resBuyers").length());
+        assertEquals(2, jsonObject.getJSONArray("resSellers").length());
+        assertEquals(2, jsonObject.getJSONArray("resItems").length());
+        assertEquals(2, jsonObject.getJSONObject("buyerAccounts").length());
+        assertEquals(2, jsonObject.getJSONObject("sellerAccounts").length());
+        assertEquals("123abc", jsonObject.getJSONObject("buyerAccounts").get("nhash03"));
     }
 }

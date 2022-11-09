@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +32,10 @@ public class Buyer extends User {
 
     public List<Item> getAlreadyBought() {
         return alreadyBought;
+    }
+
+    public void setAlreadyBought(List<Item> alreadyBought) {
+        this.alreadyBought = alreadyBought;
     }
 
     // MODIFIES : this
@@ -77,6 +84,22 @@ public class Buyer extends User {
         if (this.getItemsToBuy().contains(i)) {
             itemsToBuy.remove(i);
         }
+    }
+
+    // EFFECTS : make a json object for the buyer
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = super.toJson();
+        JSONArray itemsJson = new JSONArray();
+
+        for (Item item : alreadyBought) {
+            itemsJson.put(item.getId());
+        }
+
+        jsonObject.put("buyer", true);
+        jsonObject.put("items", itemsJson);
+
+        return jsonObject;
     }
 
 }

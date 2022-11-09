@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 import java.util.Random;
 
 import static java.lang.Integer.parseInt;
@@ -13,7 +15,7 @@ public class Item {
     private double price;
     private Residence location;
     private Integer id;
-    private Seller seller;
+    private Long sellerID;
     private Buyer buyer;
     private Boolean availability;
 
@@ -22,13 +24,26 @@ public class Item {
     // initially available to buy and no description provided. At first,
     // it does not have any buyer and is located in a specific residence.
     // The id of the item is unique for itself.
-    public Item(String name, double price, Residence location, Seller seller) {
+    public Item(String name, double price, Residence location, Long sellerID) {
         this.name = name;
         this.description = null;
         this.price = price;
         this.location = location;
+        location.addNewItem(this);
         this.id = setID();
-        this.seller = seller;
+        this.sellerID = sellerID;
+        this.buyer = null;
+        this.availability = true;
+    }
+
+    public Item(String name, double price, Residence location, Long sellerID, Integer id) {
+        this.name = name;
+        this.description = null;
+        this.price = price;
+        this.location = location;
+//        location.addNewItem(this);
+        this.id = id;
+        this.sellerID = sellerID;
         this.buyer = null;
         this.availability = true;
     }
@@ -46,15 +61,15 @@ public class Item {
     }
 
     public Residence getLocation() {
-        return location;
+        return this.location;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Seller getSeller() {
-        return this.seller;
+    public Long getSellerID() {
+        return this.sellerID;
     }
 
     public Buyer getBuyer() {
@@ -81,6 +96,10 @@ public class Item {
         this.buyer = buyer;
     }
 
+    public void setAvailability(Boolean availability) {
+        this.availability = availability;
+    }
+
     // MODIFIES : this
     // EFFECTS : change the availability from available to not available and vice versa.
     public void switchAvailability() {
@@ -105,6 +124,20 @@ public class Item {
         }
     }
 
+    // EFFECTS : make a json object from an item
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("name", name);
+        jsonObject.put("description", description);
+        jsonObject.put("location", location);
+        jsonObject.put("price",  price);
+        jsonObject.put("ID", id);
+        jsonObject.put("avail?", availability);
+        jsonObject.put("Seller ID", sellerID);
+
+        return jsonObject;
+    }
 
 
 }

@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,10 @@ public class Seller extends User {
         return itemsToSell;
     }
 
+    public void setItemsToSell(List<Item> itemsToSell) {
+        this.itemsToSell = itemsToSell;
+    }
+
     // MODIFIES : this
     // EFFECTS : add an item to the selling list
     public void addItemToSell(Item i) {
@@ -36,5 +43,21 @@ public class Seller extends User {
         if (itemsToSell.contains(i)) {
             itemsToSell.remove(i);
         }
+    }
+
+    // EFFECTS : make a json object from the seller
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = super.toJson();
+        JSONArray itemsJson = new JSONArray();
+
+        for (Item item : itemsToSell) {
+            itemsJson.put(item.getId());
+        }
+
+        jsonObject.put("buyer", false);
+        jsonObject.put("items", itemsJson);
+
+        return jsonObject;
     }
 }

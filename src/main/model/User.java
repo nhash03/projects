@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+
 // Representing a user who lives in a specific residence,with name,account balance (in CAD) , personal
 // username and password.
 abstract class User {
     protected String name;
+    long id;
     protected Residence location;
     protected String username;
     protected String password;
@@ -18,6 +21,7 @@ abstract class User {
         location = res;
         username = un;
         password = pass;
+        id = setId();
         balance = 0;
     }
 
@@ -51,5 +55,27 @@ abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public long setId() {
+        return (name + username).hashCode();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    // EFFECTS : make a json object from the user
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+
+        jsonObject.put("id", id);
+        jsonObject.put("username", username);
+        jsonObject.put("password", password);
+        jsonObject.put("name", name);
+        jsonObject.put("location", location.getName());
+        jsonObject.put("balance", balance);
+
+        return jsonObject;
     }
 }

@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.*;
 
 // Representing a residence with a specific name and lists of the sellers, buyers
@@ -32,34 +35,44 @@ public class Residence {
         this.sellersAccounts = new HashMap<>();
     }
 
-    // MODIFIES : this
-    // EFFECTS : Add sample item to the residence market
-    public void setDefaultItems() {
-        List<Item> items = new ArrayList<>();
-        if ("Walter Gage".equals(this.name)) {
-            items.add(new Item("milk", 1.55, new Residence("Walter Gage"), s1));
-            items.add(new Item("yoghurt", 2.3, new Residence("Walter Gage"), s1));
-            items.add(new Item("pencil", 3.61, new Residence("Walter Gage"), s1));
-            items.add(new Item("honey", 6.5, new Residence("Walter Gage"), s1));
-        } else if ("Totem Park".equals(this.name)) {
-            items.add(new Item("banana", 1.55, new Residence("Totem Park"), s2));
-            items.add(new Item("apple", 2.3, new Residence("Totem Park"), s2));
-            items.add(new Item("pear", 3.61, new Residence("Totem Park"), s2));
-            items.add(new Item("TV", 500, new Residence("Totem Park"), s2));
-        } else if ("Exchange".equals(this.name)) {
-            items.add(new Item("coke", 1.55, new Residence("Exchange"), s3));
-            items.add(new Item("sugar", 2.3, new Residence("Exchange"), s3));
-            items.add(new Item("honey", 6.5, new Residence("Exchange"), s3));
-        } else if ("Place Vanier".equals(this.name)) {
-            items.add(new Item("coke", 1.55, new Residence("Place Vanier"), s4));
-            items.add(new Item("coffee", 3.61, new Residence("Place Vanier"), s4));
-            items.add(new Item("honey", 6.5, new Residence("Place Vanier"), s4));
-        } else {
-            return;
-        }
-        this.items = items;
+    // REQUIRES : length of name > 0
+    // EFFECTS : make a residence with the given name, buyers and sellers accounts, buyers, sellers
+    // and items
+    public Residence(String name, HashMap<String, String> ba, HashMap<String, String> sa,
+                     List<Buyer> bs, List<Item> is, List<Seller> ss) {
+        this.name = name;
+        this.sellersAccounts = sa;
+        this.buyers = bs;
+        this.sellers = ss;
+        this.buyersAccounts = ba;
+        this.items = is;
     }
 
+    // REQUIRES : user residence should be one of Walter Gage, Exchange, Totem Park or Place Vanier
+    // EFFECTS : returns the user residence from the given name
+    public static Residence parseToRes(String userResidence, Residences rs) {
+        Residence res;
+        if (userResidence.equals("Walter Gage")) {
+            res = rs.getResidences().get(0);
+        } else if (userResidence.equals("Exchange")) {
+            res = rs.getResidences().get(1);
+        } else if (userResidence.equals("Totem Park")) {
+            res = rs.getResidences().get(2);
+        } else {
+            res = rs.getResidences().get(3);
+        }
+        return res;
+    }
+
+    // EFFECTS : produces true if the residence has no seller, buyer, seller account, buyer account
+    // and items
+    public Boolean isEmpty() {
+        return (this.getItems().size() == 0
+                && this.getBuyers().size() == 0
+                && this.getSellers().size() == 0
+                && this.getBuyersAccounts().size() == 0
+                && this.getSellersAccounts().size() == 0);
+    }
 
     public String getName() {
         return this.name;
@@ -85,6 +98,26 @@ public class Residence {
         return sellersAccounts;
     }
 
+    public void setBuyers(List<Buyer> buyers) {
+        this.buyers = buyers;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public void setBuyersAccounts(HashMap<String, String> buyersAccounts) {
+        this.buyersAccounts = buyersAccounts;
+    }
+
+    public void setSellersAccounts(HashMap<String, String> sellersAccounts) {
+        this.sellersAccounts = sellersAccounts;
+    }
+
+    public void setSellers(List<Seller> sellers) {
+        this.sellers = sellers;
+    }
+
     // MODIFIES : this
     // EFFECTS : add a new seller to the residence's list and comment if adding was
     // successful or not.
@@ -106,6 +139,39 @@ public class Residence {
     // EFFECTS : add a new item to the residence's list
     public void addNewItem(Item i) {
         items.add(i);
+    }
+
+
+    // EFFECTS : make a json object from the residence
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray resItems = new JSONArray();
+        JSONArray resBuyers = new JSONArray();
+        JSONArray resSellers = new JSONArray();
+        JSONObject buyerAccount = new JSONObject();
+        JSONObject sellerAccount = new JSONObject();
+        jsonObject.put("resItems", resItems);
+        jsonObject.put("resBuyers", resBuyers);
+        jsonObject.put("resSellers", resSellers);
+        jsonObject.put("buyerAccounts", buyerAccount);
+        jsonObject.put("sellerAccounts", sellerAccount);
+        for (Item i: items) {
+            resItems.put(i.toJson());
+        }
+        for (Seller s: sellers) {
+            resSellers.put(s.toJson());
+        }
+        for (Buyer b: buyers) {
+            resBuyers.put(b.toJson());
+        }
+        for (String username : buyersAccounts.keySet()) {
+            buyerAccount.put(username, buyersAccounts.get(username));
+        }
+        for (String username : sellersAccounts.keySet()) {
+            sellerAccount.put(username, sellersAccounts.get(username));
+        }
+        return jsonObject;
     }
 
 }

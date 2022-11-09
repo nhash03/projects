@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,8 +23,8 @@ public class TestBuyer {
         buyer1 = new Buyer("Negin", walterGage, "nhash03", "12abc");
         testingBuyer = new Buyer("Maggie", exchange, "magmag", "123e");
         mainSeller = new Seller("Parshan", walterGage, "pjavan", "123a1");
-        milk = new Item("Milk", 2.50, walterGage, mainSeller);
-        yoghurt = new Item("Yoghurt", 3.778, walterGage, mainSeller);
+        milk = new Item("Milk", 2.50, walterGage, mainSeller.getId());
+        yoghurt = new Item("Yoghurt", 3.778, walterGage, mainSeller.getId());
     }
 
     @Test
@@ -165,4 +166,16 @@ public class TestBuyer {
         assertEquals(1, buyer1.getItemsToBuy().size());
         assertTrue(buyer1.getItemsToBuy().contains(yoghurt));
     }
+
+    @Test
+    public void testToJson() {
+        buyer1.addItemToBuy(milk);
+        buyer1.setBalance(3);
+        buyer1.payForItems();
+        JSONObject jsonObject = buyer1.toJson();
+        System.out.println(jsonObject.toString());
+        assertEquals("nhash03",jsonObject.get("username"));
+        assertEquals(buyer1.getId(),jsonObject.optLong("id"));
+    }
+
 }

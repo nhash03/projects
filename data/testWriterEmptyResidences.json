@@ -1,0 +1,100 @@
+{
+    "Exchange": {
+        "resItems": [],
+        "resBuyers": [],
+        "buyerAccounts": {},
+        "resSellers": [{
+            "password": ["456"],
+            "balance": [0],
+            "name": ["s2"],
+            "location": ["Exchange"],
+            "id": [107793798],
+            "items": [],
+            "username": ["def"],
+            "buyer": false
+        }],
+        "sellerAccounts": {"def": "456"}
+    },
+    "Totem Park": {
+        "resItems": [],
+        "resBuyers": [{
+            "password": ["222"],
+            "balance": [0],
+            "name": ["b2"],
+            "location": ["Totem Park"],
+            "id": [92091922],
+            "items": [],
+            "username": ["bbb"],
+            "buyer": true
+        }],
+        "buyerAccounts": {"bbb": "222"},
+        "resSellers": [{
+            "password": ["789"],
+            "balance": [0],
+            "name": ["s3"],
+            "location": ["Totem Park"],
+            "id": [107826568],
+            "items": [],
+            "username": ["ghi"],
+            "buyer": false
+        }],
+        "sellerAccounts": {"ghi": "789"}
+    },
+    "Walter Gage": {
+        "resItems": [{
+            "avail?": false,
+            "price": [1.5],
+            "name": ["i1"],
+            "description": [null],
+            "location": ["model.Residence@20ce78ec"],
+            "Seller ID": 107761028,
+            "ID": 22291
+        }],
+        "resBuyers": [{
+            "password": ["111"],
+            "balance": [8.5],
+            "name": ["b1"],
+            "location": ["Walter Gage"],
+            "id": [92061138],
+            "items": [22291],
+            "username": ["aaa"],
+            "buyer": true
+        }],
+        "buyerAccounts": {"aaa": "111"},
+        "resSellers": [{
+            "password": ["123"],
+            "balance": [0],
+            "name": ["s1"],
+            "location": ["Walter Gage"],
+            "id": [107761028],
+            "items": [],
+            "username": ["abc"],
+            "buyer": false
+        }],
+        "sellerAccounts": {"abc": "123"}
+    },
+    "Place Vanier": {
+        "resItems": [{
+            "avail?": true,
+            "price": [3.75],
+            "name": ["i2"],
+            "description": [null],
+            "location": ["model.Residence@393671df"],
+            "Seller ID": 107859338,
+            "ID": 33490
+        }],
+        "resBuyers": [],
+        "buyerAccounts": {},
+        "resSellers": [{
+            "password": ["012"],
+            "balance": [0],
+            "name": ["s4"],
+            "location": ["Place Vanier"],
+            "id": [107859338],
+            "items": [],
+            "username": ["jkl"],
+            "buyer": false
+        }],
+        "sellerAccounts": {"jkl": "012"}
+    }
+}

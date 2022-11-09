@@ -13,8 +13,14 @@ public class LoginSystem {
     // MODIFIES : this
     // EFFECTS : make a potential user with give username and password
     // in the given residence
-    public LoginSystem(Residence userResidence, String username, String password) {
-        this.userResidence = userResidence;
+    public LoginSystem(String userResidence, String username, String password, Residences residences) {
+        this.userResidence = Residence.parseToRes(userResidence, residences);
+        this.password = password;
+        this.username = username;
+    }
+
+    public LoginSystem(Residence residence, String username, String password) {
+        this.userResidence = residence;
         this.password = password;
         this.username = username;
     }
@@ -36,7 +42,7 @@ public class LoginSystem {
     public Integer buyerLogin() {
         HashMap<String, String> listOfUsers = userResidence.getBuyersAccounts();
         int index = 0;
-        for (String un: listOfUsers.keySet()) {
+        for (String un : listOfUsers.keySet()) {
             if (this.username.equals(un)) {
                 if (this.password.equals(listOfUsers.get(un))) {
                     return index;
@@ -54,7 +60,7 @@ public class LoginSystem {
     public Integer sellerLogin() {
         HashMap<String, String> listOfUsers = userResidence.getSellersAccounts();
         int index = 0;
-        for (String un: listOfUsers.keySet()) {
+        for (String un : listOfUsers.keySet()) {
             if (this.username.equals(un)) {
                 if (this.password.equals(listOfUsers.get(un))) {
                     return index;
@@ -63,7 +69,10 @@ public class LoginSystem {
                 }
             }
             index++;
+
         }
         return -2;
     }
+
+
 }
