@@ -3,10 +3,14 @@ package model;
 import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestResidence {
+    Residences residences;
     Residence residence;
     Buyer buyer1;
     Buyer b2;
@@ -24,6 +28,7 @@ public class TestResidence {
         s2 = new Seller("Ava", residence, "avahmadi", "abc-1");
         i1 = new Item("Milk", 2.50, residence, s1.getId());
         i2 = new Item("Yoghurt", 3.778, residence, s2.getId());
+        residences = new Residences();
     }
 
     @Test
@@ -36,8 +41,6 @@ public class TestResidence {
         assertEquals(0, emptyRes.getBuyersAccounts().size());
         assertEquals(0, emptyRes.getSellersAccounts().size());
 
-//        residence.addNewItem(i1);
-//        residence.addNewItem(i2);
         assertEquals(2, residence.getItems().size());
         assertTrue(residence.getItems().contains(i1));
         assertTrue(residence.getItems().contains(i2));
@@ -55,6 +58,38 @@ public class TestResidence {
         assertEquals(2, residence.getSellersAccounts().size());
         assertEquals("123", residence.getSellersAccounts().get("shad"));
         assertEquals("abc-1", residence.getSellersAccounts().get("avahmadi"));
+    }
+
+    @Test
+    public void testConstructor2() {
+        Residence newRes = new Residence("blah", new HashMap<>(), new HashMap<>(),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        newRes.getItems().add(i1);
+        newRes.getSellersAccounts().put("a", "a");
+        newRes.getBuyersAccounts().put("b", "b");
+        newRes.getBuyers().add(buyer1);
+        newRes.getSellers().add(s1);
+        assertEquals(1, newRes.getItems().size());
+        assertEquals(1, newRes.getSellers().size());
+        assertEquals(1, newRes.getBuyers().size());
+        assertEquals(1, newRes.getSellersAccounts().size());
+        assertEquals(1, newRes.getBuyersAccounts().size());
+        assertTrue(newRes.getItems().contains(i1));
+        assertTrue(newRes.getBuyers().contains(buyer1));
+        assertTrue(newRes.getSellersAccounts().containsKey("a"));
+        assertTrue(newRes.getBuyersAccounts().containsKey("b"));
+        assertTrue(newRes.getSellers().contains(s1));
+        assertEquals("blah", newRes.getName());
+    }
+
+    @Test
+    public void testSetItems() {
+        List<Item> items = new ArrayList<>();
+        Item item = new Item("a", 1.75, residence, 123L);
+        items.add(item);
+        residence.setItems(items);
+        assertEquals(1, residence.getItems().size());
+        assertTrue(residence.getItems().contains(item));
     }
 
     @Test
@@ -112,41 +147,25 @@ public class TestResidence {
         assertEquals(4, residence.getItems().size());
     }
 
-//    @Test
-//    public void testSetDefaultItems() {
-//        Residence walterGage = new Residence("Walter Gage");
-//        walterGage.setDefaultItems();
-//        assertEquals(4, walterGage.getItems().size());
-//        assertEquals("milk", walterGage.getItems().get(0).getName());
-//        assertEquals("yoghurt", walterGage.getItems().get(1).getName());
-//        assertEquals("pencil", walterGage.getItems().get(2).getName());
-//        assertEquals("honey", walterGage.getItems().get(3).getName());
-//
-//        Residence placeVanier = new Residence("Place Vanier");
-//        placeVanier.setDefaultItems();
-//        assertEquals(3, placeVanier.getItems().size());
-//        assertEquals("coke", placeVanier.getItems().get(0).getName());
-//        assertEquals("coffee", placeVanier.getItems().get(1).getName());
-//        assertEquals("honey", placeVanier.getItems().get(2).getName());
-//
-//        Residence exchange = new Residence("Exchange");
-//        exchange.setDefaultItems();
-//        assertEquals(3, exchange.getItems().size());
-//        assertEquals("coke", exchange.getItems().get(0).getName());
-//        assertEquals("sugar", exchange.getItems().get(1).getName());
-//        assertEquals("honey", exchange.getItems().get(2).getName());
-//
-//        Residence totemPark = new Residence("Totem Park");
-//        totemPark.setDefaultItems();
-//        assertEquals(4, totemPark.getItems().size());
-//        assertEquals("banana", totemPark.getItems().get(0).getName());
-//        assertEquals("apple", totemPark.getItems().get(1).getName());
-//        assertEquals("pear", totemPark.getItems().get(2).getName());
-//        assertEquals("TV", totemPark.getItems().get(3).getName());
-//
-//        Residence nullRes = new Residence("null");
-//        assertEquals(0, nullRes.getItems().size());
-//    }
+    @Test
+    public void testParseToRes() {
+        Residence wg = Residence.parseToRes("Walter Gage", residences);
+        Residence ex = Residence.parseToRes("Exchange", residences);
+        Residence tp = Residence.parseToRes("Totem Park", residences);
+        Residence pv = Residence.parseToRes("Place Vanier", residences);
+        assertEquals("Walter Gage", wg.getName());
+        assertEquals("Exchange", ex.getName());
+        assertEquals("Totem Park", tp.getName());
+        assertEquals("Place Vanier", pv.getName());
+    }
+
+    @Test
+    public void testIsEmpty() {
+        Residence emptyResidence = new Residence("Empty Res");
+        assertTrue(emptyResidence.isEmpty());
+        emptyResidence.addNewItem(i1);
+        assertFalse(emptyResidence.isEmpty());
+    }
 
     @Test
     public void testToJson() {

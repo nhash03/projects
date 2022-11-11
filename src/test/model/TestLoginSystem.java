@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestLoginSystem {
     LoginSystem logSys;
+    LoginSystem loginSystem;
     Residences residences;
     Residence res;
 
@@ -15,6 +16,7 @@ class TestLoginSystem {
         residences = new Residences();
         logSys = new LoginSystem("Exchange", "nhash03", "123abc", residences);
         res = Residence.parseToRes("Exchange", residences);
+        loginSystem = new LoginSystem(res, "username", "password");
     }
 
     @Test
@@ -22,6 +24,9 @@ class TestLoginSystem {
         assertEquals(res, logSys.getUserResidence());
         assertEquals("nhash03", logSys.getUsername());
         assertEquals("123abc", logSys.getPassword());
+        assertEquals(res, loginSystem.getUserResidence());
+        assertEquals("username", loginSystem.getUsername());
+        assertEquals("password", loginSystem.getPassword());
     }
 
     @Test
