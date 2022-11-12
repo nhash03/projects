@@ -165,6 +165,18 @@ public class TestResidence {
         assertTrue(emptyResidence.isEmpty());
         emptyResidence.addNewItem(i1);
         assertFalse(emptyResidence.isEmpty());
+        emptyResidence.setItems(new ArrayList<>());
+        emptyResidence.addNewSeller(s1);
+        assertFalse(emptyResidence.isEmpty());
+        emptyResidence.setSellers(new ArrayList<>());
+        emptyResidence.setSellersAccounts(new HashMap<>());
+        emptyResidence.addNewBuyer(b2);
+        assertFalse(emptyResidence.isEmpty());
+        emptyResidence.setBuyers(new ArrayList<>());
+        assertFalse(emptyResidence.isEmpty());
+        emptyResidence.setBuyersAccounts(new HashMap<>());
+        emptyResidence.getSellersAccounts().put("a", "a");
+        assertFalse(emptyResidence.isEmpty());
     }
 
     @Test
