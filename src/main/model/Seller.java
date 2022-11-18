@@ -28,7 +28,7 @@ public class Seller extends User {
     }
 
     public void setItemsToSell(List<Item> itemsToSell) {
-        this.itemsToSell = itemsToSell;
+        this.itemsToSell = new ArrayList<>(itemsToSell);
     }
 
     // MODIFIES : this

@@ -27,14 +27,34 @@ public class MarketApp {
 
     boolean stillRunning = true;
 
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
+    public Buyer getBuyer() {
+        return buyer;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public Residence getWalterGage() {
+        return walterGage;
+    }
+
     // EFFECTS : tuns the market application
     public MarketApp() throws IOException {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         residences = new Residences();
-        input = new Scanner(System.in);
+        //input = new Scanner(System.in);
         init();
-        runMarket();
+//        runMarket();
     }
 
     // MODIFIES : this
@@ -62,7 +82,7 @@ public class MarketApp {
     // MODIFIES : this
     // EFFECTS : initializes the residences
     private void init() {
-        input.useDelimiter("\n");
+        //input.useDelimiter("\n");
 
         loadResidences();
         walterGage = residences.getResidences().get(0);
@@ -211,25 +231,25 @@ public class MarketApp {
     }
 
     // EFFECTS : returns the residence based on its initials
-    private Residence handleResidence(String resCommand) throws IOException {
+    public Residence handleResidence(String resCommand) {
         Residence res = null;
         switch (resCommand) {
-            case("e") :
+            case("Exchange") :
                 res = exchange;
                 break;
-            case("w") :
+            case("Walter Gage") :
                 res = walterGage;
                 break;
-            case ("t") :
+            case ("Totem Park") :
                 res = totemPark;
                 break;
-            case ("p") :
+            case ("Place Vanier") :
                 res = placeVanier;
                 break;
             default:
                 System.out.println("\nYour residence is not in our list right now!!");
                 System.out.println("Please register again!");
-                runMarket();
+                //runMarket();
         }
         return res;
     }
@@ -386,13 +406,13 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : remove an item with given ID if exists in the buyer's wish list
-    private void removeByID(Buyer b, String id) {
+    public static void removeByID(Buyer b, String id) {
         try {
             int idInteger = parseInt(id);
             for (Item i: b.getItemsToBuy()) {
                 if (i.getId() == idInteger) {
                     b.removeFromWishlist(i);
-                    System.out.println("Item " + i.getName() + " with ID " + id + " has successfully removed.");
+                    //System.out.println("Item " + i.getName() + " with ID " + id + " has successfully removed.");
                 }
             }
         } catch (NumberFormatException nfe) {
@@ -403,13 +423,13 @@ public class MarketApp {
 
     // MODIFIES : this
     // EFFECTS : add an item with given ID if exists to the buyer's wish list
-    private void addById(Buyer b, String id) {
+    public static void addById(Buyer b, String id) {
         try {
             int idInteger = parseInt(id);
             for (Item i: b.getLocation().getItems()) {
                 if (i.getId().equals(idInteger)) {
                     b.addItemToBuy(i);
-                    System.out.println("Item " + i.getName() + " with ID " + id + " has successfully added.");
+                    //System.out.println("Item " + i.getName() + " with ID " + id + " has successfully added.");
                 }
             }
         } catch (NumberFormatException nfe) {
@@ -566,7 +586,7 @@ public class MarketApp {
         }
     }
 
-    private void saveResidences() {
+    public void saveResidences() {
         try {
             jsonWriter.open();
             jsonWriter.write(residences);

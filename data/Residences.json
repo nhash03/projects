@@ -1,10 +1,36 @@
 {
     "Exchange": {
-        "resItems": [],
-        "resBuyers": [],
-        "buyerAccounts": {},
-        "resSellers": [],
-        "sellerAccounts": {}
+        "resItems": [{
+            "avail?": false,
+            "price": 2,
+            "name": "milk",
+            "description": "good",
+            "location": "model.Residence@3f89b1f4",
+            "Seller ID": 1302925066,
+            "ID": 68077
+        }],
+        "resBuyers": [{
+            "password": "shadan",
+            "balance": 8,
+            "name": "shadan",
+            "location": "Exchange",
+            "id": 1302925066,
+            "items": [68077],
+            "username": "shadan",
+            "buyer": true
+        }],
+        "buyerAccounts": {"shadan": "shadan"},
+        "resSellers": [{
+            "password": "shadan",
+            "balance": 0,
+            "name": "shadan",
+            "location": "Exchange",
+            "id": 1302925066,
+            "items": [68077],
+            "username": "shadan",
+            "buyer": false
+        }],
+        "sellerAccounts": {"shadan": "shadan"}
     },
     "Totem Park": {
         "resItems": [],

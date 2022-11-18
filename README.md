@@ -41,3 +41,28 @@ hop on the elevator and knock on your neighbor's door!
 - As a user, I want to be able to save my shopping list (as a buyer) or the
 items that I have added to my residence list (as a seller).
 - As a user, I want to be able to logging in and get my previous saved states (wishlist, history and etc.)
+
+
+## Instructions for Grader
+
+- You can generate the first required event related to adding Xs to a Y by : Select Buyer in the Main Menu -> You can register** or log in with
+  (username : new, password : new, residence : Totem Park) -> Select Start Shopping Button -> (Increase the window size 
+if not displayed) -> Write an item id and press Add Item (you can then clear the text box and write another id) ->
+press return -> Go to Set Balance -> Set balance to the sum of your selected items or more -> press set -> 
+Go to shopping bag -> The items are displayed -> You can write the item ID on the text box and select delete
+
+
+- You can generate the second required event related to adding Xs to a Y by : 
+  All of the previous steps -> select pay and pay for items -> You can return and see them in the previous purchase part
+
+
+- You can locate my visual component by : You can see UBC logo on the top of main menu
+
+
+- You can reload the state of my application by : press load data button in the main menu
+
+
+- You can save the state of my application by : in the main menu of account (different between buyer and seller) there is a save account button
+
+
+** For residence part only write one of the following options : Totem Park, Exchange, Place Vanier or Walter Gage

@@ -111,6 +111,7 @@ public class JsonReader {
             List<Item> alreadyBought = itemIDtoItem(jsonObject.getJSONArray("items"), rs, j);
             Buyer b = new Buyer(name, rs.getResidences().get(j), username, password);
             b.setAlreadyBought(alreadyBought);
+            System.out.println(alreadyBought);
             b.setBalance(balance);
             buyers.add(b);
         }

@@ -35,7 +35,7 @@ public class Buyer extends User {
     }
 
     public void setAlreadyBought(List<Item> alreadyBought) {
-        this.alreadyBought = alreadyBought;
+        this.alreadyBought = new ArrayList<>(alreadyBought);
     }
 
     // MODIFIES : this
