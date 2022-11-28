@@ -4,6 +4,9 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,6 +26,7 @@ public class TestSeller {
         buyer = new Buyer("Parshan", walterGage, "pjavan", "123a1");
         milk = new Item("Milk", 2.50, walterGage, seller1.getId());
         yoghurt = new Item("Yoghurt", 3.778, walterGage, seller1.getId());
+        EventLog.getInstance().clear();
     }
 
     @Test
@@ -78,5 +82,23 @@ public class TestSeller {
         JSONObject jsonObject = seller1.toJson();
         assertEquals("nhash03",jsonObject.get("username"));
         assertEquals(1, jsonObject.getJSONArray("items").length());
+    }
+
+    @Test
+    public void testSellerEvents() {
+        Seller testSeller = new Seller("test", walterGage, "test", "test");
+        testSeller.addSellerEvent();
+        Item testItem = new Item("new", 10, walterGage, testSeller.getId());
+        testSeller.addItemToSell(testItem);
+        testSeller.deleteItem(testItem);
+        ArrayList<String> events = new ArrayList<>();
+        for (Event event: EventLog.getInstance()) {
+            events.add(event.getDescription());
+        }
+        assertEquals("Event log cleared.", events.get(0));
+        assertEquals("The seller, test joined Walter Gage", events.get(1));
+        assertEquals("new has been added to Walter Gage by test", events.get(2));
+        assertEquals("new has been deleted from Walter Gage by test", events.get(3));
+        assertEquals(4, events.size());
     }
 }

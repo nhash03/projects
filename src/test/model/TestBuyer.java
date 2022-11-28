@@ -3,6 +3,8 @@ package model;
 import org.json.JSONObject;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,6 +27,7 @@ public class TestBuyer {
         mainSeller = new Seller("Parshan", walterGage, "pjavan", "123a1");
         milk = new Item("Milk", 2.50, walterGage, mainSeller.getId());
         yoghurt = new Item("Yoghurt", 3.778, walterGage, mainSeller.getId());
+        EventLog.getInstance().clear();
     }
 
     @Test
@@ -176,6 +179,29 @@ public class TestBuyer {
         System.out.println(jsonObject.toString());
         assertEquals("nhash03",jsonObject.get("username"));
         assertEquals(buyer1.getId(),jsonObject.optLong("id"));
+    }
+
+    @Test
+    public void testBuyerEvents() {
+        Buyer test = new Buyer("test", walterGage, "test", "test");
+        test.addBuyerEvent();
+        Item testItem = new Item("new", 22, walterGage, test.getId());
+        test.addItemToBuy(testItem);
+        test.removeFromWishlist(testItem);
+        test.addItemToBuy(testItem);
+        test.setBalance(30);
+        test.payForItems();
+        ArrayList<String> events = new ArrayList<>();
+        for (Event event: EventLog.getInstance()) {
+            events.add(event.getDescription());
+        }
+        assertEquals("Event log cleared.", events.get(0));
+        assertEquals("The buyer, test joined Walter Gage", events.get(1));
+        assertEquals("Item new added to test shopping bag.", events.get(2));
+        assertEquals("test removed new from his/her wish list.", events.get(3));
+        assertEquals("Buyer test paid for items!.", events.get(5));
+
+        assertEquals(6, events.size());
     }
 
 }
