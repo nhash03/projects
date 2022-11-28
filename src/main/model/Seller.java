@@ -23,6 +23,11 @@ public class Seller extends User {
         res.addNewSeller(this);
     }
 
+    public void addSellerEvent() {
+        EventLog.getInstance().logEvent(new Event("The seller, " + this.name + " joined "
+                + this.getLocation().getName()));
+    }
+
     public List<Item> getItemsToSell() {
         return itemsToSell;
     }
@@ -35,6 +40,8 @@ public class Seller extends User {
     // EFFECTS : add an item to the selling list
     public void addItemToSell(Item i) {
         itemsToSell.add(i);
+        EventLog.getInstance().logEvent(new Event(i.getName() + " has been added to "
+                + this.getLocation().getName() + " by " + this.name));
     }
 
     // MODIFIES : this
@@ -43,6 +50,8 @@ public class Seller extends User {
         if (itemsToSell.contains(i)) {
             itemsToSell.remove(i);
         }
+        EventLog.getInstance().logEvent(new Event(i.getName() + " has been deleted from "
+                + this.getLocation().getName() + " by " + this.name));
     }
 
     // EFFECTS : make a json object from the seller

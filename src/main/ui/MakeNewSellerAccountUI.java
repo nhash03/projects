@@ -1,8 +1,6 @@
 package ui;
 
-import model.Buyer;
-import model.Residences;
-import model.Seller;
+import model.*;
 import persistence.JsonWriter;
 
 import javax.swing.*;
@@ -86,6 +84,7 @@ public class MakeNewSellerAccountUI extends JFrame {
             } else if (e.getSource() == quit) {
                 frame.setVisible(false);
                 frame.dispose();
+                printLog(EventLog.getInstance());
             }
         }
 
@@ -101,6 +100,13 @@ public class MakeNewSellerAccountUI extends JFrame {
             } catch (FileNotFoundException e) {
                 System.out.println("Unable to write to file: " + "./data/Residences.json");
             }
+        }
+    }
+
+    // EFFECTS : print the logged events on the console
+    private void printLog(EventLog eventLog) {
+        for (Event e: eventLog) {
+            System.out.println((e.toString() + "\n\n"));
         }
     }
 }

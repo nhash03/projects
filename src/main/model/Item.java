@@ -130,7 +130,7 @@ public class Item {
 
         jsonObject.put("name", name);
         jsonObject.put("description", description);
-        jsonObject.put("location", location);
+        jsonObject.put("location", location.getName());
         jsonObject.put("price",  price);
         jsonObject.put("ID", id);
         jsonObject.put("avail?", availability);

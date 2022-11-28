@@ -143,7 +143,6 @@ public class Residence {
 
 
     // EFFECTS : make a json object from the residence
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         JSONArray resItems = new JSONArray();
@@ -151,11 +150,7 @@ public class Residence {
         JSONArray resSellers = new JSONArray();
         JSONObject buyerAccount = new JSONObject();
         JSONObject sellerAccount = new JSONObject();
-        jsonObject.put("resItems", resItems);
-        jsonObject.put("resBuyers", resBuyers);
-        jsonObject.put("resSellers", resSellers);
-        jsonObject.put("buyerAccounts", buyerAccount);
-        jsonObject.put("sellerAccounts", sellerAccount);
+        jsonObject = Residence.init(jsonObject, resItems, resBuyers, resSellers, buyerAccount, sellerAccount);
         for (Item i: items) {
             resItems.put(i.toJson());
         }
@@ -171,6 +166,16 @@ public class Residence {
         for (String username : sellersAccounts.keySet()) {
             sellerAccount.put(username, sellersAccounts.get(username));
         }
+        return jsonObject;
+    }
+
+    private static JSONObject init(JSONObject jsonObject, JSONArray resItems, JSONArray resBuyers,
+                             JSONArray resSellers, JSONObject buyerAccount, JSONObject sellerAccount) {
+        jsonObject.put("resItems", resItems);
+        jsonObject.put("resBuyers", resBuyers);
+        jsonObject.put("resSellers", resSellers);
+        jsonObject.put("buyerAccounts", buyerAccount);
+        jsonObject.put("sellerAccounts", sellerAccount);
         return jsonObject;
     }
 

@@ -45,7 +45,6 @@ public class Modify extends JFrame {
         finish.addActionListener(handler);
 
 
-        frame.setLayout(null);
         frame.setVisible(true);
     }
 

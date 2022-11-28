@@ -26,6 +26,11 @@ public class Buyer extends User {
         res.addNewBuyer(this);
     }
 
+    public void addBuyerEvent() {
+        EventLog.getInstance().logEvent(new Event("The buyer, " + this.name + " joined "
+                + this.getLocation().getName()));
+    }
+
     public List<Item> getItemsToBuy() {
         return itemsToBuy;
     }
@@ -42,6 +47,8 @@ public class Buyer extends User {
     // EFFECTS : Add an item to the wish list
     public void addItemToBuy(Item i) {
         itemsToBuy.add(i);
+        EventLog.getInstance().logEvent(new Event("Item " + i.getName() + " added to "
+                + this.name + " shopping bag."));
     }
 
     // EFFECTS : return how much money you should pay in order
@@ -70,6 +77,7 @@ public class Buyer extends User {
                 notEnoughBalance(i);
             }
         }
+        EventLog.getInstance().logEvent(new Event("Buyer " + this.name + " paid for items!."));
     }
 
     // EFFECTS : return a string to say that you don't have enough money
@@ -84,6 +92,8 @@ public class Buyer extends User {
         if (this.getItemsToBuy().contains(i)) {
             itemsToBuy.remove(i);
         }
+        EventLog.getInstance().logEvent(new Event(this.name + " removed "
+                + i.getName() + " from his/her wish list."));
     }
 
     // EFFECTS : make a json object for the buyer

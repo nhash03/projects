@@ -111,6 +111,8 @@ public class MainMenuUI extends JFrame {
         }
     }
 
+
+
     // EFFECTS : run the main menu display
     public static void main(String[] args) throws IOException {
         new MainMenuUI();

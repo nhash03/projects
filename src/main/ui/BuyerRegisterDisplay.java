@@ -63,6 +63,7 @@ public class BuyerRegisterDisplay {
                 Residence res = handleResidence(resStr);
                 Buyer buyer = new Buyer(nm, res, user, pass);
                 new MakeNewBuyerAccountUI(buyer, residences);
+                buyer.addBuyerEvent();
 
                 frame.setVisible(false);
                 frame.dispose();

@@ -63,6 +63,7 @@ public class SellerRegisterDisplay {
                 String resStr = residence.getText();
                 Residence res = handleResidence(resStr);
                 Seller seller = new Seller(nm, res, user, pass);
+                seller.addSellerEvent();
                 new MakeNewSellerAccountUI(residences, seller);
 
                 frame.setVisible(false);

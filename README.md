@@ -66,3 +66,20 @@ Go to shopping bag -> The items are displayed -> You can write the item ID on th
 
 
 ** For residence part only write one of the following options : Totem Park, Exchange, Place Vanier or Walter Gage
+
+
+## Phase 4: Task 2
+Sun Nov 27 20:09:06 PST 2022
+The buyer, negin joined Totem Park
+
+
+Sun Nov 27 20:09:16 PST 2022
+Item yoyo added to negin shopping bag.
+
+
+Sun Nov 27 20:09:23 PST 2022
+Item water added to negin shopping bag.
+
+
+Sun Nov 27 20:09:37 PST 2022
+Buyer negin paid for items!.
