@@ -14,14 +14,7 @@ public class Residence {
     private List<Buyer> buyers;
     private List<Seller> sellers;
     private List<Item> items;
-    private static final Seller s1 =
-            new Seller("seller1", new Residence("Walter Gage"), "123", "abc");
-    private static final Seller s2 =
-            new Seller("seller2", new Residence("Totem Park"), "456", "def");
-    private static final Seller s3 =
-            new Seller("seller3", new Residence("Exchange"), "789", "ghi");
-    private static final Seller s4 =
-            new Seller("seller4", new Residence("Place Vanier"), "101", "jkl");
+
 
     // REQUIRES : length of name > 0
     // EFFECTS : make a residence with the given name which initially has no items,

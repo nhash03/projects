@@ -83,3 +83,10 @@ Item water added to negin shopping bag.
 
 Sun Nov 27 20:09:37 PST 2022
 Buyer negin paid for items!.
+
+## Phase 4: Task 3
+
+- If I had more time, I would use the card layout in order to decrease the
+number of classes that I have in the UI package.
+- I also think that putting a message box for each user can improve the functionality 
+of the application.
