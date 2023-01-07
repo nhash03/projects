@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 // Represents a log of market app events
+//change to using singleton
 public class EventLog implements Iterable<Event> {
     private static EventLog theLog;
     private Collection<Event> events;
