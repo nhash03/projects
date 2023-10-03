@@ -1,0 +1,116 @@
+.Host h4 {
+    color: #edf0f5;
+}
+
+.Host .box {
+    background: black;
+    border-radius: 6px;
+    border: 1px solid rgb(62 28 131 / 10%);
+    padding: 2rem;
+    transition: 0.5s;
+    margin: 70px;
+}
+
+.Host .box:hover {
+    box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+    cursor: pointer;
+}
+
+.Host .box {
+    text-align: center;
+    margin-top: 30px;
+    width: 60%;
+    margin-left: 20%;
+}
+
+.Host .img {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    position: relative;
+}
+
+.Host img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.Host .img i {
+    color: #108be7;
+    font-size: 17px;
+    position: absolute;
+    top: 35px;
+    right: -10px;
+}
+
+.Host .img::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 110px;
+    height: 110px;
+    border: 5px solid #edf0f5;
+    border-radius: 50%;
+}
+
+.Host h3 {
+    display: block;
+    margin-top: 20px;
+    color: #edf0f5;
+}
+
+.Host h4 {
+    color: grey;
+    margin-right: 5px;
+}
+
+.Host ul {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.Host ul li {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.Host button {
+    margin-top: 20px;
+}
+
+.Host .button i {
+    color: white;
+    font-size: 20px;
+}
+
+.Host .btn4 {
+    background-color: grey;
+}
+
+.Host {
+    background-color: white;
+    box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+}
+
+.Host .heading {
+    margin-top: 100px;
+}
+.Host p {
+    color: white;
+}
+.Host h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+.Host .label{
+    color: black;
+    font-size: 20px;
+}

@@ -1,0 +1,101 @@
+.TopHosts h4 {
+    color: #edf0f5;
+}
+.TopHosts .box {
+    background: black;
+    border-radius: 6px;
+    border: 1px solid rgb(62 28 131 / 10%);
+    padding: 2rem;
+    transition: 0.5s;
+    margin: 70px;
+}
+
+.TopHosts .box:hover {
+    box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+    cursor: pointer;
+}
+
+.TopHosts .details {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.TopHosts .img {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    position: relative;
+}
+
+.TopHosts img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.TopHosts .img i {
+    color: #108be7;
+    font-size: 17px;
+    position: absolute;
+    top: 35px;
+    right: -10px;
+}
+
+.TopHosts .img::after {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 110px;
+    height: 110px;
+    border: 5px solid #edf0f5;
+    border-radius: 50%;
+}
+
+.TopHosts label {
+    display: inline-block;
+    margin-top: 20px;
+    color: #edf0f5;
+}
+
+.TopHosts i {
+    color: grey;
+    margin-right: 5px;
+}
+
+.TopHosts ul {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.TopHosts ul li {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.TopHosts .button {
+    margin-top: 20px;
+}
+
+.TopHosts .button i {
+    color: white;
+    font-size: 20px;
+}
+
+.TopHosts .btn4 {
+    background-color: grey;
+}
+.TopHosts {
+    background-color: white;
+    box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+}
+.TopHosts .heading {
+    margin-top: 100px;
+}
+

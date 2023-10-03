@@ -1,0 +1,86 @@
+.MainSearch {
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    background-size: cover;
+    height: 90vh;
+    /* width: 100%; */
+    /* background-color: black; */
+}
+#vid {
+    object-fit: cover;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    /* min-height: 100%; */
+}
+.MainSearch .overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    /* bottom: 0; */
+    width: 100vw;
+    /* padding: 20px; */
+    z-index: 5;
+    margin-left: 0;
+        padding-bottom: 73.5vh;
+    /* padding-bottom: 900px; */
+}
+.MainSearch .container {
+    /* background: rgba(0, 0, 0, 0.5); */
+    
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-left: 0;
+    padding-bottom: 73.5vh;
+}
+.MainSearch h1 {
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+    text-align: center;
+    /* margin-left: 0px; */
+}
+.MainSearch p {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    /* opacity: 0.8; */
+}
+
+
+.MainSearch button {
+    size: 100px;
+    background:rgb(3, 82, 10);
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(3, 82, 10, 0.2);
+        color: rgb(2, 59, 7);
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 130px;
+        /* padding: 12px 24px; */
+        transition: all 0.3s ease;
+        /* margin-left: 50%; */
+        text-align: center;
+        width: 400px;
+        height: 100px;
+}
+
+@media screen and (max-width: 800px) {
+    .MainSearch .container {
+        padding-top: 30%;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    form .box {
+        border-left: none;
+    }
+
+    form input {
+        width: 50%;
+    }
+}

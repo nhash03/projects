@@ -1,0 +1,48 @@
+.location .boxes {
+    margin-left: 50px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 40px;
+    /* padding: 10px; */
+}
+.location .container {
+    box-shadow: 0 0 20px 0 rgb(112 121 138 / 18%);
+}
+
+.location .boxes>div {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    /* padding: 20px 0; */
+    font-size: 30px;
+}
+
+.overlay  {
+    position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 280px;
+        background-color: rgba(5, 4, 4, 0.8);
+        box-sizing: border-box;
+        text-align: center;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        padding-top: 170px;
+        padding-bottom: px;
+}
+.location img {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 270px;
+    border-radius: 5px;
+}
+
+.location .title {
+    text-align: center;
+    padding-top: 30px;
+    margin-bottom: 40px;
+}

@@ -1,0 +1,46 @@
+
+  
+  .about {
+    margin: 0;
+    padding: 0;
+    font-family: Impact,  'Arial Narrow Bold', sans-serif;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .about.video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+.about .content {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    top: 0;
+    /* margin-left: 160px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+  }
+  .about p {
+        background-color: rgba(0, 0, 0, 0);
+        text-align: center;
+        margin-left: 40%;
+        font-size: 20px;
+  }
+  .about h1 {
+    margin-left: 40%;
+  }
+  .about .overlay {
+    position: absolute;
+    margin-top: 0;
+    /*margin-left: 0; */
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0,0,0,.4); */
+    /* background-color: #000000cc; */
+  }

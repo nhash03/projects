@@ -1,0 +1,29 @@
+.blah {
+    text-align: center;
+    background-color: black;
+    color: white;
+    height: 60vh;
+}
+.blah h1 {
+    padding-top: 120px;
+    text-align: center;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-bottom: 60px;
+}
+
+.blah .btn_group button {
+    border: 1px solid green;
+    padding: 10px 24 px;
+    cursor: pointer;
+    width: 20%;
+    display: block;
+    margin: 20px;
+    text-align: center;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+.blah .btn_group .orange {
+    background-color: rgb(206, 104, 21);
+}
+
