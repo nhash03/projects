@@ -1,0 +1,103 @@
+{
+    "Exchange": {
+        "resItems": [],
+        "resBuyers": [],
+        "buyerAccounts": {},
+        "resSellers": [],
+        "sellerAccounts": {}
+    },
+    "Totem Park": {
+        "resItems": [
+            {
+                "avail?": false,
+                "price": 2,
+                "name": "yoyo",
+                "description": "2",
+                "location": "Totem Park",
+                "Seller ID": -1232574176,
+                "ID": 7151
+            },
+            {
+                "avail?": false,
+                "price": 3,
+                "name": "water",
+                "description": "3",
+                "location": "Totem Park",
+                "Seller ID": -1232574176,
+                "ID": 90285
+            }
+        ],
+        "resBuyers": [
+            {
+                "password": "nhashem",
+                "balance": 0,
+                "name": "negin",
+                "location": "Totem Park",
+                "id": 987832271,
+                "items": [],
+                "username": "nhashem",
+                "buyer": true
+            },
+            {
+                "password": "negin",
+                "balance": 15,
+                "name": "negin",
+                "location": "Totem Park",
+                "id": -1232574176,
+                "items": [
+                    7151,
+                    90285
+                ],
+                "username": "negin",
+                "buyer": true
+            }
+        ],
+        "buyerAccounts": {
+            "nhashem": "nhashem",
+            "negin": "negin"
+        },
+        "resSellers": [
+            {
+                "password": "neg",
+                "balance": 0,
+                "name": "negneg",
+                "location": "Totem Park",
+                "id": -1152052336,
+                "items": [],
+                "username": "neg",
+                "buyer": false
+            },
+            {
+                "password": "negin",
+                "balance": 0,
+                "name": "negin",
+                "location": "Totem Park",
+                "id": -1232574176,
+                "items": [
+                    7151,
+                    90285
+                ],
+                "username": "negin",
+                "buyer": false
+            }
+        ],
+        "sellerAccounts": {
+            "neg": "neg",
+            "negin": "negin"
+        }
+    },
+    "Walter Gage": {
+        "resItems": [],
+        "resBuyers": [],
+        "buyerAccounts": {},
+        "resSellers": [],
+        "sellerAccounts": {}
+    },
+    "Place Vanier": {
+        "resItems": [],
+        "resBuyers": [],
+        "buyerAccounts": {},
+        "resSellers": [],
+        "sellerAccounts": {}
+    }
+}
